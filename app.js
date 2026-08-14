@@ -2,12 +2,12 @@
   const $ = (id) => document.getElementById(id);
   const root = document.documentElement;
   const STORAGE_THEME = 'bst-media-theme';
-  const STORAGE_COMPLEXITY = 'bst-media-complexity';
   const STORAGE_PRESETS = 'bst-media-presets-v1';
+  const STORAGE_BITRATE_UNIT = 'bst-media-bitrate-unit';
 
   const state = {
     mode: 'card',
-    complexity: localStorage.getItem(STORAGE_COMPLEXITY) || 'simple',
+    bitrateUnit: localStorage.getItem(STORAGE_BITRATE_UNIT) === 'MBps' ? 'MBps' : 'Mbps',
   };
 
   const defaults = {
@@ -15,6 +15,46 @@
     shoot: { bitrate: 250, hours: 3, days: 4, margin: 20, copies: 2 },
     copy: { volume: 780, unit: 'GB', speed: 650, efficiency: 75, copies: 1 }
   };
+
+  const CAMERA_PRESETS = [
+    // Sony FX6 — official Sony 4K recording bitrates
+    { camera: 'Sony FX6', name: 'XAVC-I 4K · 23.98/24p', bitrate: 240 },
+    { camera: 'Sony FX6', name: 'XAVC-I 4K · 25p', bitrate: 250 },
+    { camera: 'Sony FX6', name: 'XAVC-I 4K · 29.97p', bitrate: 300 },
+    { camera: 'Sony FX6', name: 'XAVC-I 4K · 50p', bitrate: 500 },
+    { camera: 'Sony FX6', name: 'XAVC-I 4K · 59.94p', bitrate: 600 },
+    { camera: 'Sony FX6', name: 'XAVC-L 4K · 23.98/25/29.97p', bitrate: 100 },
+    { camera: 'Sony FX6', name: 'XAVC-L 4K · 50/59.94p', bitrate: 150 },
+
+    // Sony FX3 — main 4K 10-bit 4:2:2 formats
+    { camera: 'Sony FX3', name: 'XAVC S-I 4K · 23.98/24p', bitrate: 240 },
+    { camera: 'Sony FX3', name: 'XAVC S-I 4K · 25p', bitrate: 250 },
+    { camera: 'Sony FX3', name: 'XAVC S-I 4K · 29.97p', bitrate: 300 },
+    { camera: 'Sony FX3', name: 'XAVC S-I 4K · 50p', bitrate: 500 },
+    { camera: 'Sony FX3', name: 'XAVC S-I 4K · 59.94p', bitrate: 600 },
+    { camera: 'Sony FX3', name: 'XAVC S 4K 422 10b · 23.98p', bitrate: 100 },
+    { camera: 'Sony FX3', name: 'XAVC S 4K 422 10b · 25/29.97p', bitrate: 140 },
+    { camera: 'Sony FX3', name: 'XAVC S 4K 422 10b · 50/59.94p', bitrate: 200 },
+    { camera: 'Sony FX3', name: 'XAVC S 4K 422 10b · 100/119.88p', bitrate: 280 },
+    { camera: 'Sony FX3', name: 'XAVC HS 4K 422 10b · 23.98p (High)', bitrate: 100 },
+    { camera: 'Sony FX3', name: 'XAVC HS 4K 422 10b · 50/59.94p (High)', bitrate: 200 },
+    { camera: 'Sony FX3', name: 'XAVC HS 4K 422 10b · 100/119.88p', bitrate: 280 },
+
+    // Sony FX5 — current official Sony XAVC settings. X-OCN intentionally excluded here:
+    // its effective rate varies with LT/C1/C2 + imager mode + project frame rate.
+    { camera: 'Sony FX5', name: 'XAVC S-I 4K · 23.98/24p', bitrate: 240 },
+    { camera: 'Sony FX5', name: 'XAVC S-I 4K · 25p', bitrate: 250 },
+    { camera: 'Sony FX5', name: 'XAVC S-I 4K · 29.97p', bitrate: 300 },
+    { camera: 'Sony FX5', name: 'XAVC S-I 4K · 50p', bitrate: 500 },
+    { camera: 'Sony FX5', name: 'XAVC S-I 4K · 59.94p', bitrate: 600 },
+    { camera: 'Sony FX5', name: 'XAVC S-L 422 4K · 23.98p', bitrate: 100 },
+    { camera: 'Sony FX5', name: 'XAVC S-L 422 4K · 25/29.97p', bitrate: 140 },
+    { camera: 'Sony FX5', name: 'XAVC S-L 422 4K · 50/59.94p', bitrate: 200 },
+    { camera: 'Sony FX5', name: 'XAVC S-L 422 4K · 100/119.88p', bitrate: 280 },
+    { camera: 'Sony FX5', name: 'XAVC HS-L 422 4K · 23.98p (High)', bitrate: 100 },
+    { camera: 'Sony FX5', name: 'XAVC HS-L 422 4K · 50/59.94p (High)', bitrate: 200 },
+    { camera: 'Sony FX5', name: 'XAVC HS-L 422 4K · 100/119.88p', bitrate: 280 }
+  ];
 
   function clampNumber(value, fallback, min = 0, max = Infinity) {
     const n = Number(value);
@@ -56,8 +96,58 @@
     });
   }
 
+  function bitrateUnitLabel() {
+    return state.bitrateUnit === 'MBps' ? 'MB/s' : 'Mb/s';
+  }
+
+  function bitrateToDisplay(mbps) {
+    return state.bitrateUnit === 'MBps' ? mbps / 8 : mbps;
+  }
+
+  function bitrateToMbps(value) {
+    return state.bitrateUnit === 'MBps' ? value * 8 : value;
+  }
+
+  function inputNumber(value, digits = 2) {
+    const rounded = Number(value.toFixed(digits));
+    return String(rounded);
+  }
+
   function getBitrate() {
-    return clampNumber($('bitrateInput').value, 250, 1, 100000);
+    const fallbackDisplay = bitrateToDisplay(250);
+    const displayValue = clampNumber($('bitrateInput').value, fallbackDisplay, 0.01, 100000);
+    return bitrateToMbps(displayValue);
+  }
+
+  function setBitrateInputFromMbps(mbps) {
+    $('bitrateInput').value = inputNumber(bitrateToDisplay(mbps));
+  }
+
+  function formatBitrate(mbps) {
+    const display = bitrateToDisplay(mbps);
+    return `${formatNumber(display, state.bitrateUnit === 'MBps' ? 2 : 2)} ${bitrateUnitLabel()}`;
+  }
+
+  function syncBitrateUnitUI() {
+    $('bitrateUnitLabel').textContent = bitrateUnitLabel();
+    $('presetBitrateUnit').textContent = bitrateUnitLabel();
+    [...$('bitrateUnit').querySelectorAll('button[data-unit]')].forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.unit === state.bitrateUnit);
+    });
+    [...$('bitrateChips').querySelectorAll('button[data-value]')].forEach(btn => {
+      btn.textContent = inputNumber(bitrateToDisplay(Number(btn.dataset.value)));
+    });
+  }
+
+  function setBitrateUnit(unit) {
+    const currentMbps = getBitrate();
+    state.bitrateUnit = unit === 'MBps' ? 'MBps' : 'Mbps';
+    localStorage.setItem(STORAGE_BITRATE_UNIT, state.bitrateUnit);
+    syncBitrateUnitUI();
+    setBitrateInputFromMbps(currentMbps);
+    renderCameraPresets();
+    renderPresets();
+    updateAll();
   }
 
   function syncBitrateChip() {
@@ -67,7 +157,7 @@
   function updateCard() {
     const bitrate = getBitrate();
     const capacity = clampNumber($('cardCapacity').value, 160, 0.1, 100000);
-    const margin = state.complexity === 'advanced' ? clampNumber($('cardMargin').value, 10, 0, 50) : 10;
+    const margin = clampNumber($('cardMargin').value, 10, 0, 50);
     const seconds = capacity * 8000 / bitrate;
     const perMinuteGB = bitrate * 60 / 8000;
     const perHourGB = bitrate * 3600 / 8000;
@@ -75,7 +165,7 @@
     const safeSeconds = usableGB * 8000 / bitrate;
 
     $('cardResult').textContent = formatDuration(seconds);
-    $('cardState').textContent = `CARTE ${formatStorage(capacity, 1)} · ${formatNumber(bitrate, 0)} Mb/s`;
+    $('cardState').textContent = `CARTE ${formatStorage(capacity, 1)} · ${formatBitrate(bitrate)}`;
     $('cardDetail').textContent = `≈ ${formatNumber(seconds / 60, 0)} min au total`;
     $('cardPerMinute').textContent = formatStorage(perMinuteGB, 2);
     $('cardPerHour').textContent = formatStorage(perHourGB, 1);
@@ -94,8 +184,8 @@
     const bitrate = getBitrate();
     const hours = clampNumber($('shootHours').value, 3, 0.1, 1000);
     const days = clampNumber($('shootDays').value, 4, 1, 1000);
-    const margin = state.complexity === 'advanced' ? clampNumber($('shootMargin').value, 20, 0, 100) : 20;
-    const copies = state.complexity === 'advanced' ? Math.round(clampNumber($('shootCopies').value, 2, 1, 5)) : 2;
+    const margin = clampNumber($('shootMargin').value, 20, 0, 100);
+    const copies = Math.round(clampNumber($('shootCopies').value, 2, 1, 5));
     const totalHours = hours * days;
     const rawGB = bitrate * totalHours * 3600 / 8000;
     const perCopyGB = rawGB * (1 + margin / 100);
@@ -103,7 +193,7 @@
     const driveTB = nextDriveSizeTB(perCopyGB);
 
     $('shootResult').textContent = formatStorage(perCopyGB, 2);
-    $('shootState').textContent = `PAR COPIE · MARGE ${formatNumber(margin, 0)} %`;
+    $('shootState').textContent = `PAR COPIE · MARGE TOURNAGE ${formatNumber(margin, 0)} %`;
     $('shootDetail').textContent = `${formatHours(totalHours)} de rushes · ${formatStorage(rawGB, 2)} de données brutes`;
     $('shootRaw').textContent = formatStorage(rawGB, 2);
     $('shootPerCopy').textContent = formatStorage(perCopyGB, 2);
@@ -120,8 +210,8 @@
     const unit = $('copyVolumeUnit').value;
     const volumeGB = unit === 'TB' ? volume * 1000 : volume;
     const speed = clampNumber($('copySpeed').value, 650, 1, 100000);
-    const efficiency = state.complexity === 'advanced' ? clampNumber($('copyEfficiency').value, 75, 10, 100) : 75;
-    const copies = state.complexity === 'advanced' ? Math.round(clampNumber($('copyCount').value, 1, 1, 5)) : 1;
+    const efficiency = clampNumber($('copyEfficiency').value, 75, 10, 100);
+    const copies = Math.round(clampNumber($('copyCount').value, 1, 1, 5));
     const theorySeconds = volumeGB * 1000 / speed;
     const realSeconds = theorySeconds / (efficiency / 100);
     const totalSeconds = realSeconds * copies;
@@ -134,6 +224,7 @@
     $('copyReal').textContent = formatDuration(realSeconds);
     $('copyEffective').textContent = `${formatNumber(effective, 0)} Mo/s`;
     $('copyAll').textContent = formatDuration(totalSeconds);
+    setActiveChip($('copyVolumeChips'), volumeGB);
     setActiveChip($('copySpeedChips'), speed);
   }
 
@@ -155,13 +246,6 @@
     $('bitratePanel').hidden = mode === 'copy';
   }
 
-  function setComplexity(value) {
-    state.complexity = value === 'advanced' ? 'advanced' : 'simple';
-    root.dataset.complexity = state.complexity;
-    localStorage.setItem(STORAGE_COMPLEXITY, state.complexity);
-    [...$('complexityMode').querySelectorAll('button[data-value]')].forEach(btn => btn.classList.toggle('active', btn.dataset.value === state.complexity));
-    updateAll();
-  }
 
   function setTheme(theme) {
     const dark = theme === 'dark';
@@ -183,6 +267,26 @@
     renderPresets();
   }
 
+  function renderCameraPresets() {
+    const select = $('cameraPresetSelect');
+    const current = select.value;
+    select.innerHTML = '<option value="">Sony FX6 / FX3 / FX5…</option>';
+    const cameras = [...new Set(CAMERA_PRESETS.map(p => p.camera))];
+    cameras.forEach(camera => {
+      const group = document.createElement('optgroup');
+      group.label = camera;
+      CAMERA_PRESETS.forEach((p, index) => {
+        if (p.camera !== camera) return;
+        const option = document.createElement('option');
+        option.value = String(index);
+        option.textContent = `${p.name} · ${formatBitrate(p.bitrate)}`;
+        group.appendChild(option);
+      });
+      select.appendChild(group);
+    });
+    if (current !== '' && CAMERA_PRESETS[Number(current)]) select.value = current;
+  }
+
   function renderPresets() {
     const select = $('presetSelect');
     const current = select.value;
@@ -191,7 +295,7 @@
     presets.forEach((p, index) => {
       const option = document.createElement('option');
       option.value = String(index);
-      option.textContent = `${p.name} · ${formatNumber(p.bitrate, 0)} Mb/s`;
+      option.textContent = `${p.name} · ${formatBitrate(Number(p.bitrate))}`;
       select.appendChild(option);
     });
     if (current && presets[Number(current)]) select.value = current;
@@ -200,11 +304,11 @@
 
   function resetMode(mode) {
     if (mode === 'card') {
-      $('bitrateInput').value = defaults.card.bitrate;
+      setBitrateInputFromMbps(defaults.card.bitrate);
       $('cardCapacity').value = defaults.card.capacity;
       $('cardMargin').value = defaults.card.margin;
     } else if (mode === 'shoot') {
-      $('bitrateInput').value = defaults.shoot.bitrate;
+      setBitrateInputFromMbps(defaults.shoot.bitrate);
       $('shootHours').value = defaults.shoot.hours;
       $('shootDays').value = defaults.shoot.days;
       $('shootMargin').value = defaults.shoot.margin;
@@ -216,6 +320,9 @@
       $('copyEfficiency').value = defaults.copy.efficiency;
       $('copyCount').value = defaults.copy.copies;
     }
+    $('cameraPresetSelect').value = '';
+    $('presetSelect').value = '';
+    $('deletePresetBtn').disabled = true;
     updateAll();
   }
 
@@ -224,9 +331,9 @@
     if (btn) switchMode(btn.dataset.mode);
   });
 
-  $('complexityMode').addEventListener('click', e => {
-    const btn = e.target.closest('button[data-value]');
-    if (btn) setComplexity(btn.dataset.value);
+  $('bitrateUnit').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-unit]');
+    if (btn && btn.dataset.unit !== state.bitrateUnit) setBitrateUnit(btn.dataset.unit);
   });
 
   $('themeToggle').addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
@@ -237,9 +344,21 @@
   $('bitrateChips').addEventListener('click', e => {
     const btn = e.target.closest('button[data-value]');
     if (!btn) return;
-    $('bitrateInput').value = btn.dataset.value;
+    setBitrateInputFromMbps(Number(btn.dataset.value));
+    $('cameraPresetSelect').value = '';
     $('presetSelect').value = '';
     $('deletePresetBtn').disabled = true;
+    updateAll();
+  });
+
+  $('cameraPresetSelect').addEventListener('change', () => {
+    const index = $('cameraPresetSelect').value;
+    if (index === '') return;
+    const preset = CAMERA_PRESETS[Number(index)];
+    if (!preset) return;
+    $('presetSelect').value = '';
+    $('deletePresetBtn').disabled = true;
+    setBitrateInputFromMbps(Number(preset.bitrate));
     updateAll();
   });
 
@@ -250,6 +369,20 @@
     updateCard();
   });
 
+  $('copyVolumeChips').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-value]');
+    if (!btn) return;
+    const volumeGB = Number(btn.dataset.value);
+    if (volumeGB >= 1000) {
+      $('copyVolume').value = inputNumber(volumeGB / 1000);
+      $('copyVolumeUnit').value = 'TB';
+    } else {
+      $('copyVolume').value = inputNumber(volumeGB);
+      $('copyVolumeUnit').value = 'GB';
+    }
+    updateCopy();
+  });
+
   $('copySpeedChips').addEventListener('click', e => {
     const btn = e.target.closest('button[data-value]');
     if (!btn) return;
@@ -257,7 +390,14 @@
     updateCopy();
   });
 
-  const liveInputs = ['bitrateInput','cardCapacity','cardMargin','shootHours','shootDays','shootMargin','shootCopies','copyVolume','copyVolumeUnit','copySpeed','copyEfficiency','copyCount'];
+  $('bitrateInput').addEventListener('input', () => {
+    $('cameraPresetSelect').value = '';
+    $('presetSelect').value = '';
+    $('deletePresetBtn').disabled = true;
+    updateAll();
+  });
+
+  const liveInputs = ['cardCapacity','cardMargin','shootHours','shootDays','shootMargin','shootCopies','copyVolume','copyVolumeUnit','copySpeed','copyEfficiency','copyCount'];
   liveInputs.forEach(id => $(id).addEventListener('input', updateAll));
   $('copyVolumeUnit').addEventListener('change', updateCopy);
 
@@ -265,7 +405,8 @@
 
   $('addPresetBtn').addEventListener('click', () => {
     $('presetName').value = '';
-    $('presetBitrate').value = getBitrate();
+    $('presetBitrate').value = inputNumber(bitrateToDisplay(getBitrate()));
+    $('presetBitrateUnit').textContent = bitrateUnitLabel();
     $('presetDialog').showModal();
     setTimeout(() => $('presetName').focus(), 50);
   });
@@ -273,14 +414,16 @@
   $('presetForm').addEventListener('submit', e => {
     e.preventDefault();
     const name = $('presetName').value.trim();
-    const bitrate = clampNumber($('presetBitrate').value, getBitrate(), 1, 100000);
+    const presetDisplay = clampNumber($('presetBitrate').value, bitrateToDisplay(getBitrate()), 0.01, 100000);
+    const bitrate = bitrateToMbps(presetDisplay);
     if (!name) return;
     const presets = loadPresets();
     presets.push({ name, bitrate });
     savePresets(presets);
-    $('bitrateInput').value = bitrate;
+    setBitrateInputFromMbps(bitrate);
     $('presetDialog').close();
     renderPresets();
+    $('cameraPresetSelect').value = '';
     $('presetSelect').value = String(presets.length - 1);
     $('deletePresetBtn').disabled = false;
     updateAll();
@@ -292,7 +435,8 @@
     if (index === '') return;
     const preset = loadPresets()[Number(index)];
     if (!preset) return;
-    $('bitrateInput').value = preset.bitrate;
+    $('cameraPresetSelect').value = '';
+    setBitrateInputFromMbps(Number(preset.bitrate));
     updateAll();
   });
 
@@ -309,7 +453,9 @@
   const storedTheme = localStorage.getItem(STORAGE_THEME);
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   setTheme(storedTheme || (prefersDark ? 'dark' : 'light'));
-  setComplexity(state.complexity);
+  syncBitrateUnitUI();
+  setBitrateInputFromMbps(250);
+  renderCameraPresets();
   renderPresets();
   switchMode('card');
   updateAll();

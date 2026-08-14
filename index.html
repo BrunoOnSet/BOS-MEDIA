@@ -10,7 +10,7 @@
   <title>BRUNO SET TOOLS / MEDIA</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icon-192.png" />
-  <link rel="stylesheet" href="style.css?v=1.0" />
+  <link rel="stylesheet" href="style.css?v=1.4" />
 </head>
 <body>
   <main class="app" id="mainApp">
@@ -30,11 +30,7 @@
       </div>
     </header>
 
-    <div class="utility-row">
-      <div class="segmented compact-segment" id="complexityMode" aria-label="Niveau d'affichage">
-        <button class="active" data-value="simple" type="button">SIMPLE</button>
-        <button data-value="advanced" type="button">AVANCÉ</button>
-      </div>
+    <div class="utility-row utility-row-single">
       <button class="utility-link" id="tipsBtn" type="button">TIPS</button>
     </div>
 
@@ -52,15 +48,29 @@
           <div class="panel-kicker">DÉBIT D'ENREGISTREMENT</div>
           <div class="panel-subtitle">Choisis un débit rapide ou saisis la valeur du codec.</div>
         </div>
-        <button class="small-action advanced-only" id="addPresetBtn" type="button">+ PRESET</button>
+        <button class="small-action" id="addPresetBtn" type="button">+ PRESET</button>
       </div>
 
       <div class="hero-field">
-        <label for="bitrateInput">Débit</label>
-        <div class="number-unit-field">
-          <input id="bitrateInput" type="number" min="1" step="1" inputmode="decimal" value="250" />
-          <span>Mb/s</span>
+        <div class="field-label-row">
+          <label for="bitrateInput">Débit</label>
+          <div class="segmented bitrate-unit-switch" id="bitrateUnit" aria-label="Unité du débit d'enregistrement">
+            <button class="active" data-unit="Mbps" type="button">Mb/s</button>
+            <button data-unit="MBps" type="button">MB/s</button>
+          </div>
         </div>
+        <div class="number-unit-field">
+          <input id="bitrateInput" type="number" min="0.01" step="0.01" inputmode="decimal" value="250" />
+          <span id="bitrateUnitLabel">Mb/s</span>
+        </div>
+      </div>
+
+      <div class="camera-preset-block">
+        <label for="cameraPresetSelect">PRESETS CAMÉRA</label>
+        <select id="cameraPresetSelect" aria-label="Presets caméra Sony">
+          <option value="">Sony FX6 / FX3 / FX5…</option>
+        </select>
+        <small>Formats 4K principaux · sélectionner un format applique automatiquement son débit.</small>
       </div>
 
       <div class="quick-chips" id="bitrateChips">
@@ -72,7 +82,7 @@
         <button data-value="1000" type="button">1000</button>
       </div>
 
-      <div class="preset-row advanced-only" id="presetRow">
+      <div class="preset-row" id="presetRow">
         <select id="presetSelect" aria-label="Mes presets">
           <option value="">Mes presets…</option>
         </select>
@@ -100,17 +110,18 @@
         <div class="quick-chips capacity-chips" id="cardCapacityChips">
           <button data-value="64" type="button">64 Go</button>
           <button data-value="128" type="button">128</button>
-          <button class="active" data-value="160" type="button">160</button>
           <button data-value="256" type="button">256</button>
           <button data-value="512" type="button">512</button>
           <button data-value="1000" type="button">1 To</button>
+          <button data-value="2000" type="button">2 To</button>
+          <button data-value="4000" type="button">4 To</button>
         </div>
 
-        <div class="advanced-only advanced-box">
+        <div class="advanced-box">
           <div class="inline-field">
             <div>
-              <label for="cardMargin">Marge de sécurité</label>
-              <small>Temps conseillé avant carte pleine</small>
+              <label for="cardMargin">Réserve carte</label>
+              <small>Capacité volontairement gardée disponible</small>
             </div>
             <div class="mini-number-unit"><input id="cardMargin" type="number" min="0" max="50" step="1" value="10" inputmode="decimal" /><span>%</span></div>
           </div>
@@ -127,8 +138,8 @@
         <div class="metric-grid">
           <div><span>Par minute</span><strong id="cardPerMinute">1,88 Go</strong></div>
           <div><span>Par heure</span><strong id="cardPerHour">112,5 Go</strong></div>
-          <div class="advanced-only"><span>Durée conseillée</span><strong id="cardSafe">1 h 17 min</strong></div>
-          <div class="advanced-only"><span>Capacité utilisée</span><strong id="cardUsable">144 Go</strong></div>
+          <div ><span>Durée conseillée</span><strong id="cardSafe">1 h 17 min</strong></div>
+          <div ><span>Capacité utilisée</span><strong id="cardUsable">144 Go</strong></div>
         </div>
       </section>
     </section>
@@ -160,9 +171,9 @@
           </div>
         </div>
 
-        <div class="advanced-only advanced-box stacked-fields">
+        <div class="advanced-box stacked-fields">
           <div class="inline-field">
-            <div><label for="shootMargin">Marge de sécurité</label><small>Prévoir du rab de stockage</small></div>
+            <div><label for="shootMargin">Marge de tournage</label><small>Réserve pour plus de rushes que prévu</small></div>
             <div class="mini-number-unit"><input id="shootMargin" type="number" min="0" max="100" step="5" value="20" inputmode="decimal" /><span>%</span></div>
           </div>
           <div class="inline-field">
@@ -186,8 +197,8 @@
         </div>
         <div class="metric-grid">
           <div><span>Rushes bruts</span><strong id="shootRaw">1,35 To</strong></div>
-          <div><span>Par copie</span><strong id="shootPerCopy">1,62 To</strong></div>
-          <div class="advanced-only"><span>Total physique</span><strong id="shootTotal">3,24 To</strong></div>
+          <div><span>Avec marge / copie</span><strong id="shootPerCopy">1,62 To</strong></div>
+          <div ><span>Total physique</span><strong id="shootTotal">3,24 To</strong></div>
           <div><span>Durée totale</span><strong id="shootDuration">12 h</strong></div>
         </div>
       </section>
@@ -223,6 +234,16 @@
           </div>
         </div>
 
+        <div class="quick-chips capacity-chips" id="copyVolumeChips">
+          <button data-value="64" type="button">64 Go</button>
+          <button data-value="128" type="button">128</button>
+          <button data-value="256" type="button">256</button>
+          <button data-value="512" type="button">512</button>
+          <button data-value="1000" type="button">1 To</button>
+          <button data-value="2000" type="button">2 To</button>
+          <button data-value="4000" type="button">4 To</button>
+        </div>
+
         <div class="quick-chips speed-chips" id="copySpeedChips">
           <button data-value="100" type="button">100</button>
           <button data-value="300" type="button">300</button>
@@ -232,7 +253,7 @@
           <button data-value="2000" type="button">2000</button>
         </div>
 
-        <div class="advanced-only advanced-box stacked-fields">
+        <div class="advanced-box stacked-fields">
           <div class="inline-field">
             <div><label for="copyEfficiency">Efficacité estimée</label><small>Overhead, petits fichiers, source/destination</small></div>
             <div class="mini-number-unit"><input id="copyEfficiency" type="number" min="10" max="100" step="5" value="75" inputmode="decimal" /><span>%</span></div>
@@ -254,8 +275,8 @@
         <div class="metric-grid">
           <div><span>Théorique</span><strong id="copyTheory">20 min</strong></div>
           <div><span>Réaliste</span><strong id="copyReal">27 min</strong></div>
-          <div class="advanced-only"><span>Débit effectif</span><strong id="copyEffective">488 Mo/s</strong></div>
-          <div class="advanced-only"><span>Total copies</span><strong id="copyAll">27 min</strong></div>
+          <div ><span>Débit effectif</span><strong id="copyEffective">488 Mo/s</strong></div>
+          <div ><span>Total copies</span><strong id="copyAll">27 min</strong></div>
         </div>
       </section>
     </section>
@@ -264,8 +285,10 @@
       <div class="technical-footer">Débits constants / moyens · capacités décimales · estimation terrain</div>
       <div class="signature">
         <a class="footer-brand-link" href="https://www.brunoguillard.com/" target="_blank" rel="noopener noreferrer">
-          <img src="logo-bruno-guillard.png" alt="Bruno Guillard" />
+          <img class="footer-logo" src="logo-bruno-guillard.png" alt="" />
+          <span>Made for the set · Bruno Guillard</span>
         </a>
+        <span class="app-version">v1.4</span>
       </div>
     </footer>
   </main>
@@ -276,10 +299,12 @@
       <div class="panel-kicker">TIPS / MEDIA</div>
       <h2>Les bons réflexes</h2>
       <div class="tips-list">
-        <p><strong>Mb/s ≠ Mo/s.</strong> Les codecs sont souvent donnés en mégabits par seconde. Les disques sont souvent donnés en mégaoctets par seconde. <strong>8 bits = 1 octet.</strong></p>
-        <p><strong>Débit variable.</strong> Certains codecs sont VBR : le résultat reste une estimation. Pour un tournage critique, garde toujours une marge.</p>
-        <p><strong>Carte.</strong> Ne compte pas sur 100 % de la capacité. La marge de sécurité sert à éviter la fin de carte au mauvais moment.</p>
-        <p><strong>Tournage.</strong> Le volume avec marge est calculé par copie. Deux copies indépendantes restent le minimum raisonnable sur beaucoup de workflows terrain.</p>
+        <p><strong>Mb/s ≠ MB/s.</strong> Mb/s signifie mégabits par seconde, MB/s signifie mégaoctets par seconde. <strong>8 Mb/s = 1 MB/s.</strong> Le switch convertit seulement l'affichage : le débit réel et les résultats restent identiques. <strong>MB/s et Mo/s désignent la même unité</strong>, en notation anglaise et française.</p>
+        <p><strong>Presets caméra.</strong> Les presets FX6, FX3 et FX5 reprennent les principaux débits 4K indiqués par Sony. Sur les codecs VBR, le volume réel peut varier. Le X-OCN de la FX5 n'est pas réduit à un preset unique : son débit dépend du mode LT/C1/C2, du mode imageur et de la cadence.</p>
+        <p><strong>Débit variable.</strong> Certains codecs sont VBR : le résultat reste une estimation. Pour un tournage critique, prévois une réserve adaptée.</p>
+        <p><strong>Carte.</strong> La réserve carte retire volontairement une partie de la capacité du calcul conseillé pour éviter d'arriver à 100 % au mauvais moment.</p>
+        <p><strong>Marge de tournage.</strong> Elle ajoute une réserve au volume estimé pour absorber davantage de prises ou une durée de tournage supérieure à celle prévue. Ce n'est ni une correction d'erreur du calcul, ni une réserve destinée au fonctionnement du SSD.</p>
+        <p><strong>Copies.</strong> Le volume avec marge est calculé par copie. Deux copies indépendantes correspondent par exemple à MASTER + BACKUP.</p>
         <p><strong>Copie.</strong> La vitesse réelle dépend du maillon le plus lent : carte, lecteur, câble, port, SSD, température et quantité de petits fichiers.</p>
       </div>
     </div>
@@ -292,12 +317,12 @@
       <h2>Ajouter un débit</h2>
       <div class="dialog-form">
         <label>Nom du preset<input id="presetName" type="text" maxlength="36" placeholder="FX6 · XAVC-I 4K 25p" required /></label>
-        <label>Débit<input id="presetBitrate" type="number" min="1" step="1" value="250" inputmode="decimal" required /><span class="input-suffix">Mb/s</span></label>
+        <label>Débit<input id="presetBitrate" type="number" min="0.01" step="0.01" value="250" inputmode="decimal" required /><span class="input-suffix" id="presetBitrateUnit">Mb/s</span></label>
       </div>
       <button class="primary-action" id="savePresetBtn" type="submit">ENREGISTRER</button>
     </form>
   </dialog>
 
-  <script src="app.js?v=1.0"></script>
+  <script src="app.js?v=1.4"></script>
 </body>
 </html>
