@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" id="themeColor" content="#F3F1EC" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="MEDIA - BST" />
+  <title>BRUNO SET TOOLS / MEDIA</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="stylesheet" href="style.css?v=1.0" />
+</head>
+<body>
+  <main class="app" id="mainApp">
+    <header class="top">
+      <div class="top-inner">
+        <div>
+          <div class="eyebrow-row">
+            <a class="eyebrow eyebrow-link" href="https://www.brunoguillard.com/" target="_blank" rel="noopener noreferrer">
+              <span class="eyebrow-mark"></span>
+              <span class="eyebrow-brand">BRUNO SET TOOLS</span>
+              <span class="eyebrow-tool">/ MEDIA</span>
+            </a>
+          </div>
+          <h1>Calculateur média</h1>
+        </div>
+        <button class="theme-toggle" id="themeToggle" type="button">DARK</button>
+      </div>
+    </header>
+
+    <div class="utility-row">
+      <div class="segmented compact-segment" id="complexityMode" aria-label="Niveau d'affichage">
+        <button class="active" data-value="simple" type="button">SIMPLE</button>
+        <button data-value="advanced" type="button">AVANCÉ</button>
+      </div>
+      <button class="utility-link" id="tipsBtn" type="button">TIPS</button>
+    </div>
+
+    <section class="mode-panel">
+      <div class="mode-tabs" id="modeTabs" role="tablist" aria-label="Mode de calcul">
+        <button class="active" data-mode="card" type="button"><span>CARTE</span><small>durée</small></button>
+        <button data-mode="shoot" type="button"><span>TOURNAGE</span><small>stockage</small></button>
+        <button data-mode="copy" type="button"><span>COPIE</span><small>temps</small></button>
+      </div>
+    </section>
+
+    <section class="panel bitrate-panel" id="bitratePanel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-kicker">DÉBIT D'ENREGISTREMENT</div>
+          <div class="panel-subtitle">Choisis un débit rapide ou saisis la valeur du codec.</div>
+        </div>
+        <button class="small-action advanced-only" id="addPresetBtn" type="button">+ PRESET</button>
+      </div>
+
+      <div class="hero-field">
+        <label for="bitrateInput">Débit</label>
+        <div class="number-unit-field">
+          <input id="bitrateInput" type="number" min="1" step="1" inputmode="decimal" value="250" />
+          <span>Mb/s</span>
+        </div>
+      </div>
+
+      <div class="quick-chips" id="bitrateChips">
+        <button data-value="100" type="button">100</button>
+        <button data-value="150" type="button">150</button>
+        <button class="active" data-value="250" type="button">250</button>
+        <button data-value="500" type="button">500</button>
+        <button data-value="750" type="button">750</button>
+        <button data-value="1000" type="button">1000</button>
+      </div>
+
+      <div class="preset-row advanced-only" id="presetRow">
+        <select id="presetSelect" aria-label="Mes presets">
+          <option value="">Mes presets…</option>
+        </select>
+        <button class="small-action danger-action" id="deletePresetBtn" type="button" disabled>SUPPR.</button>
+      </div>
+    </section>
+
+    <section class="mode-content active" id="cardMode" data-mode-content="card">
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-kicker">CARTE</div>
+            <div class="panel-subtitle">Combien de temps puis-je enregistrer ?</div>
+          </div>
+          <button class="small-action" data-reset="card" type="button">RESET</button>
+        </div>
+
+        <div class="hero-field">
+          <label for="cardCapacity">Capacité</label>
+          <div class="number-unit-field">
+            <input id="cardCapacity" type="number" min="1" step="1" inputmode="decimal" value="160" />
+            <span>Go</span>
+          </div>
+        </div>
+        <div class="quick-chips capacity-chips" id="cardCapacityChips">
+          <button data-value="64" type="button">64 Go</button>
+          <button data-value="128" type="button">128</button>
+          <button class="active" data-value="160" type="button">160</button>
+          <button data-value="256" type="button">256</button>
+          <button data-value="512" type="button">512</button>
+          <button data-value="1000" type="button">1 To</button>
+        </div>
+
+        <div class="advanced-only advanced-box">
+          <div class="inline-field">
+            <div>
+              <label for="cardMargin">Marge de sécurité</label>
+              <small>Temps conseillé avant carte pleine</small>
+            </div>
+            <div class="mini-number-unit"><input id="cardMargin" type="number" min="0" max="50" step="1" value="10" inputmode="decimal" /><span>%</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="result">
+        <div class="result-hero">
+          <div class="result-label">DURÉE D'ENREGISTREMENT</div>
+          <div class="result-value" id="cardResult">1 h 25 min</div>
+          <div class="result-state" id="cardState">CARTE 160 Go · 250 Mb/s</div>
+          <div class="result-detail" id="cardDetail">≈ 85 min au total</div>
+        </div>
+        <div class="metric-grid">
+          <div><span>Par minute</span><strong id="cardPerMinute">1,88 Go</strong></div>
+          <div><span>Par heure</span><strong id="cardPerHour">112,5 Go</strong></div>
+          <div class="advanced-only"><span>Durée conseillée</span><strong id="cardSafe">1 h 17 min</strong></div>
+          <div class="advanced-only"><span>Capacité utilisée</span><strong id="cardUsable">144 Go</strong></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="mode-content" id="shootMode" data-mode-content="shoot" hidden>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-kicker">TOURNAGE</div>
+            <div class="panel-subtitle">Combien de stockage faut-il prévoir ?</div>
+          </div>
+          <button class="small-action" data-reset="shoot" type="button">RESET</button>
+        </div>
+
+        <div class="field-grid two-col">
+          <div class="hero-field compact-hero">
+            <label for="shootHours">Rushes / jour</label>
+            <div class="number-unit-field">
+              <input id="shootHours" type="number" min="0.1" step="0.25" inputmode="decimal" value="3" />
+              <span>h</span>
+            </div>
+          </div>
+          <div class="hero-field compact-hero">
+            <label for="shootDays">Nombre de jours</label>
+            <div class="number-unit-field">
+              <input id="shootDays" type="number" min="1" step="1" inputmode="numeric" value="4" />
+              <span>j</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="advanced-only advanced-box stacked-fields">
+          <div class="inline-field">
+            <div><label for="shootMargin">Marge de sécurité</label><small>Prévoir du rab de stockage</small></div>
+            <div class="mini-number-unit"><input id="shootMargin" type="number" min="0" max="100" step="5" value="20" inputmode="decimal" /><span>%</span></div>
+          </div>
+          <div class="inline-field">
+            <div><label for="shootCopies">Nombre de copies</label><small>Ex. MASTER + BACKUP = 2</small></div>
+            <div class="mini-number-unit"><input id="shootCopies" type="number" min="1" max="5" step="1" value="2" inputmode="numeric" /><span>×</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="result">
+        <div class="result-hero">
+          <div class="result-label">STOCKAGE À PRÉVOIR</div>
+          <div class="result-value" id="shootResult">1,62 To</div>
+          <div class="result-state" id="shootState">PAR COPIE · MARGE 20 %</div>
+          <div class="result-detail" id="shootDetail">12 h de rushes · 1,35 To de données brutes</div>
+        </div>
+        <div class="recommendation" id="shootRecommendation">
+          <span class="recommendation-kicker">RECOMMANDATION</span>
+          <strong>2 × SSD 2 To</strong>
+          <small>pour MASTER + BACKUP</small>
+        </div>
+        <div class="metric-grid">
+          <div><span>Rushes bruts</span><strong id="shootRaw">1,35 To</strong></div>
+          <div><span>Par copie</span><strong id="shootPerCopy">1,62 To</strong></div>
+          <div class="advanced-only"><span>Total physique</span><strong id="shootTotal">3,24 To</strong></div>
+          <div><span>Durée totale</span><strong id="shootDuration">12 h</strong></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="mode-content" id="copyMode" data-mode-content="copy" hidden>
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-kicker">COPIE</div>
+            <div class="panel-subtitle">Combien de temps avant de pouvoir démonter ?</div>
+          </div>
+          <button class="small-action" data-reset="copy" type="button">RESET</button>
+        </div>
+
+        <div class="field-grid two-col copy-grid">
+          <div class="hero-field compact-hero">
+            <label for="copyVolume">Volume</label>
+            <div class="number-unit-field">
+              <input id="copyVolume" type="number" min="0.1" step="1" inputmode="decimal" value="780" />
+              <select id="copyVolumeUnit" aria-label="Unité du volume">
+                <option value="GB" selected>Go</option>
+                <option value="TB">To</option>
+              </select>
+            </div>
+          </div>
+          <div class="hero-field compact-hero">
+            <label for="copySpeed">Vitesse réelle annoncée</label>
+            <div class="number-unit-field">
+              <input id="copySpeed" type="number" min="1" step="10" inputmode="decimal" value="650" />
+              <span>Mo/s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-chips speed-chips" id="copySpeedChips">
+          <button data-value="100" type="button">100</button>
+          <button data-value="300" type="button">300</button>
+          <button data-value="500" type="button">500</button>
+          <button class="active" data-value="650" type="button">650</button>
+          <button data-value="1000" type="button">1000</button>
+          <button data-value="2000" type="button">2000</button>
+        </div>
+
+        <div class="advanced-only advanced-box stacked-fields">
+          <div class="inline-field">
+            <div><label for="copyEfficiency">Efficacité estimée</label><small>Overhead, petits fichiers, source/destination</small></div>
+            <div class="mini-number-unit"><input id="copyEfficiency" type="number" min="10" max="100" step="5" value="75" inputmode="decimal" /><span>%</span></div>
+          </div>
+          <div class="inline-field">
+            <div><label for="copyCount">Copies successives</label><small>1 = une destination</small></div>
+            <div class="mini-number-unit"><input id="copyCount" type="number" min="1" max="5" step="1" value="1" inputmode="numeric" /><span>×</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="result">
+        <div class="result-hero">
+          <div class="result-label">TEMPS DE COPIE ESTIMÉ</div>
+          <div class="result-value" id="copyResult">27 min</div>
+          <div class="result-state" id="copyState">ESTIMATION RÉALISTE · 75 %</div>
+          <div class="result-detail" id="copyDetail">780 Go à 650 Mo/s</div>
+        </div>
+        <div class="metric-grid">
+          <div><span>Théorique</span><strong id="copyTheory">20 min</strong></div>
+          <div><span>Réaliste</span><strong id="copyReal">27 min</strong></div>
+          <div class="advanced-only"><span>Débit effectif</span><strong id="copyEffective">488 Mo/s</strong></div>
+          <div class="advanced-only"><span>Total copies</span><strong id="copyAll">27 min</strong></div>
+        </div>
+      </section>
+    </section>
+
+    <footer>
+      <div class="technical-footer">Débits constants / moyens · capacités décimales · estimation terrain</div>
+      <div class="signature">
+        <a class="footer-brand-link" href="https://www.brunoguillard.com/" target="_blank" rel="noopener noreferrer">
+          <img src="logo-bruno-guillard.png" alt="Bruno Guillard" />
+        </a>
+      </div>
+    </footer>
+  </main>
+
+  <dialog id="tipsDialog">
+    <div class="dialog-inner">
+      <button class="close" data-close-dialog="tipsDialog" type="button" aria-label="Fermer">×</button>
+      <div class="panel-kicker">TIPS / MEDIA</div>
+      <h2>Les bons réflexes</h2>
+      <div class="tips-list">
+        <p><strong>Mb/s ≠ Mo/s.</strong> Les codecs sont souvent donnés en mégabits par seconde. Les disques sont souvent donnés en mégaoctets par seconde. <strong>8 bits = 1 octet.</strong></p>
+        <p><strong>Débit variable.</strong> Certains codecs sont VBR : le résultat reste une estimation. Pour un tournage critique, garde toujours une marge.</p>
+        <p><strong>Carte.</strong> Ne compte pas sur 100 % de la capacité. La marge de sécurité sert à éviter la fin de carte au mauvais moment.</p>
+        <p><strong>Tournage.</strong> Le volume avec marge est calculé par copie. Deux copies indépendantes restent le minimum raisonnable sur beaucoup de workflows terrain.</p>
+        <p><strong>Copie.</strong> La vitesse réelle dépend du maillon le plus lent : carte, lecteur, câble, port, SSD, température et quantité de petits fichiers.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="presetDialog">
+    <form class="dialog-inner" id="presetForm" method="dialog">
+      <button class="close" data-close-dialog="presetDialog" type="button" aria-label="Fermer">×</button>
+      <div class="panel-kicker">MES PRESETS</div>
+      <h2>Ajouter un débit</h2>
+      <div class="dialog-form">
+        <label>Nom du preset<input id="presetName" type="text" maxlength="36" placeholder="FX6 · XAVC-I 4K 25p" required /></label>
+        <label>Débit<input id="presetBitrate" type="number" min="1" step="1" value="250" inputmode="decimal" required /><span class="input-suffix">Mb/s</span></label>
+      </div>
+      <button class="primary-action" id="savePresetBtn" type="submit">ENREGISTRER</button>
+    </form>
+  </dialog>
+
+  <script src="app.js?v=1.0"></script>
+</body>
+</html>
