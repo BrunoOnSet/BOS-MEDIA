@@ -292,12 +292,12 @@
     const usableGB = capacity * (1 - margin / 100);
     const safeSeconds = usableGB * 8000 / bitrate;
 
-    $('cardResult').textContent = formatDuration(seconds);
-    $('cardState').textContent = `CARTE ${formatStorage(capacity, 1)} · ${formatBitrate(bitrate)}`;
-    $('cardDetail').textContent = `≈ ${formatNumber(seconds / 60, 0)} min au total`;
+    $('cardResult').textContent = formatDuration(safeSeconds);
+    $('cardState').textContent = `CARTE ${formatStorage(capacity, 1)} · ${formatBitrate(bitrate)} · RÉSERVE ${formatNumber(margin, 0)} %`;
+    $('cardDetail').textContent = `≈ ${formatNumber(safeSeconds / 60, 0)} min utilisables · ${formatNumber(seconds / 60, 0)} min théoriques à 100 %`;
     $('cardPerMinute').textContent = formatStorage(perMinuteGB, 2);
     $('cardPerHour').textContent = formatStorage(perHourGB, 1);
-    $('cardSafe').textContent = formatDuration(safeSeconds);
+    $('cardSafe').textContent = formatDuration(seconds);
     $('cardUsable').textContent = formatStorage(usableGB, 1);
     setActiveChip($('cardCapacityChips'), capacity);
   }
