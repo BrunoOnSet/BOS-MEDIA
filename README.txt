@@ -25,3 +25,5 @@ Les modes Blackmagic RAW Constant Quality (Q0/Q1/Q3/Q5) ne sont pas convertis en
 ARRIRAW n'est pas ramené à un preset générique ; son débit dépend du mode capteur et du workflow.
 
 Installation PWA : héberger le dossier en HTTPS puis ouvrir dans le navigateur du téléphone et choisir « Ajouter à l'écran d'accueil ».
+
+V2.0 : réserve carte à 0 % par défaut, contrôles numériques desktop éclaircis, sélection rapide débit/capacité alignée sur le bleu BST.

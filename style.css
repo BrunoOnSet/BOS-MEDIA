@@ -10,7 +10,7 @@
   --accent:#2E7F8E;
   --accent-soft:rgba(46,127,142,.10);
   --accent-strong:#236B78;
-  --chip-active-bg:#17191C;
+  --chip-active-bg:#2F5B66;
   --chip-active-text:#FFFFFF;
   --danger:#9A4C47;
   --shadow:0 9px 28px rgba(20,20,20,.055);
@@ -27,8 +27,8 @@ html[data-theme="dark"]{
   --accent:#62A9B5;
   --accent-soft:rgba(98,169,181,.12);
   --accent-strong:#72BBC6;
-  --chip-active-bg:#F1F1EF;
-  --chip-active-text:#17191C;
+  --chip-active-bg:#2F5B66;
+  --chip-active-text:#FFFFFF;
   --danger:#E08B84;
   --shadow:none;
 }
@@ -37,6 +37,10 @@ html{background:var(--bg);color-scheme:light dark}
 body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;transition:background .2s,color .2s}
 button,input,select{font:inherit}
 button{cursor:pointer}
+/* Desktop number steppers: use the BST light-on-dark control treatment. */
+input[type="number"]{color-scheme:dark}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button{opacity:1;filter:brightness(0) invert(1)}
 .app{width:100%;max-width:620px;margin:0 auto;padding:calc(22px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom))}
 .top{background:var(--panel2);border:1px solid var(--line);border-radius:22px;padding:14px 16px 15px;margin-bottom:18px}.top-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 .eyebrow{display:flex;align-items:center;gap:7px;color:var(--text);text-decoration:none;font-size:11px;font-weight:850;letter-spacing:.12em}.eyebrow-mark{width:18px;height:2px;background:var(--accent);display:inline-block;border-radius:2px}.eyebrow-brand{font-weight:900}.eyebrow-tool{color:var(--muted);font-weight:800}

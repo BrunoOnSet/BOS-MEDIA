@@ -13,7 +13,7 @@
   };
 
   const defaults = {
-    card: { bitrate: 250, capacity: 160, margin: 10 },
+    card: { bitrate: 250, capacity: 160, margin: 0 },
     shoot: { bitrate: 250, hours: 3, days: 4, margin: 20, copies: 2 },
     copy: { volume: 780, unit: 'GB', speed: 650, efficiency: 75, copies: 1 }
   };
@@ -285,7 +285,7 @@
   function updateCard() {
     const bitrate = getBitrate();
     const capacity = clampNumber($('cardCapacity').value, 160, 0.1, 100000);
-    const margin = clampNumber($('cardMargin').value, 10, 0, 50);
+    const margin = clampNumber($('cardMargin').value, 0, 0, 50);
     const seconds = capacity * 8000 / bitrate;
     const perMinuteGB = bitrate * 60 / 8000;
     const perHourGB = bitrate * 3600 / 8000;
