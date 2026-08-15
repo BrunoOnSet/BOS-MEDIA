@@ -1,4 +1,4 @@
-BRUNO SET TOOLS / MEDIA — V1.8
+BRUNO ONSET / MEDIA — V1.8
 
 3 modes :
 - CARTE : durée d'enregistrement selon capacité + débit
