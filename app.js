@@ -741,6 +741,40 @@
     $('deletePresetBtn').disabled = true;
   });
 
+  function installCustomNumberSteppers() {
+    document.querySelectorAll('.number-unit-field input[type="number"], .mini-number-unit input[type="number"]').forEach(input => {
+      if (input.nextElementSibling?.classList?.contains('custom-stepper')) return;
+      const stepper = document.createElement('span');
+      stepper.className = 'custom-stepper';
+      stepper.setAttribute('aria-hidden', 'false');
+      const up = document.createElement('button');
+      up.type = 'button';
+      up.className = 'step-up';
+      up.setAttribute('aria-label', 'Augmenter');
+      const down = document.createElement('button');
+      down.type = 'button';
+      down.className = 'step-down';
+      down.setAttribute('aria-label', 'Diminuer');
+      const step = direction => {
+        try { direction > 0 ? input.stepUp() : input.stepDown(); }
+        catch {
+          const current = Number(input.value) || 0;
+          const amount = Number(input.step) || 1;
+          input.value = String(current + direction * amount);
+        }
+        input.dispatchEvent(new Event('input', { bubbles:true }));
+        input.dispatchEvent(new Event('change', { bubbles:true }));
+        input.focus({ preventScroll:true });
+      };
+      up.addEventListener('click', () => step(1));
+      down.addEventListener('click', () => step(-1));
+      stepper.append(up, down);
+      input.insertAdjacentElement('afterend', stepper);
+    });
+  }
+
+  installCustomNumberSteppers();
+
   const storedTheme = localStorage.getItem(STORAGE_THEME);
   setTheme(storedTheme || 'light');
   syncBitrateUnitUI();
