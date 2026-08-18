@@ -27,3 +27,10 @@ ARRIRAW n'est pas ramené à un preset générique ; son débit dépend du mode 
 Installation PWA : héberger le dossier en HTTPS puis ouvrir dans le navigateur du téléphone et choisir « Ajouter à l'écran d'accueil ».
 
 V2.0 : réserve carte à 0 % par défaut, contrôles numériques desktop éclaircis, sélection rapide débit/capacité alignée sur le bleu BST.
+
+
+V2.4 — BOS CAMERA DB
+- MEDIA utilise maintenant la même base centrale `BOS-CAMERA-DB/cameras.json` que FRAME et DOF.
+- Les presets d'enregistrement Sony, ARRI et Blackmagic sont stockés dans le bloc `media` de chaque caméra.
+- Fallback embarqué + cache local : MEDIA reste utilisable hors ligne.
+- Métadonnées PWA harmonisées en BRUNO ONSET / MEDIA et MEDIA - BOS.

@@ -18,168 +18,50 @@
     copy: { volume: 780, unit: 'GB', speed: 650, efficiency: 75, copies: 1 }
   };
 
-  const PRORES_TARGET_1080_2997 = {
-    'ProRes 422 HQ': 220,
-    'ProRes 422': 147,
-    'ProRes 422 LT': 102,
-    'ProRes 422 Proxy': 45,
-    'ProRes 4444': 330,
-    'ProRes 4444 XQ': 500,
-  };
+  const CAMERA_DB_URL = "https://raw.githubusercontent.com/BrunoSetTools/BOS-CAMERA-DB/main/cameras.json";
+  const CAMERA_DB_CACHE_KEY = "bos-camera-db-cache-v1";
+  const FALLBACK_SHARED_CAMERA_DB = {"schemaVersion":1,"databaseVersion":"1.1","updated":"2026-08-18","cameras":[{"id":"fx30","name":"Sony FX30","brand":"Sony","group":"SONY","sensorWidthMm":23.3,"dof":{"label":"Super 35 / APS-C","cocMm":0.019,"cropToFF":1.5},"media":{"label":"FX30","modes":{"DCI 4K":{"width":4096,"height":2160,"codecs":{"XAVC S-I":{"kind":"fixed","rates":{"24":240,"25":250,"50":500,"23.98":240,"29.97":300,"59.94":600},"note":"All-Intra · 4:2:2 10 bit"}}},"UHD 4K":{"width":3840,"height":2160,"codecs":{"XAVC S-I":{"kind":"fixed","rates":{"24":240,"25":250,"50":500,"23.98":240,"29.97":300,"59.94":600},"note":"All-Intra · 4:2:2 10 bit"},"XAVC S":{"kind":"fixed","rates":{"25":140,"50":200,"100":280,"23.98":100,"29.97":140,"59.94":200,"119.88":280},"note":"Long GOP · 4:2:2 10 bit"},"XAVC HS":{"kind":"fixed","rates":{"50":200,"100":280,"23.98":100,"59.94":200,"119.88":280},"note":"HEVC Long GOP · 4:2:2 10 bit"}}},"HD":{"width":1920,"height":1080,"codecs":{"XAVC S-I":{"kind":"fixed","rates":{"25":93,"50":185,"23.98":89,"29.97":111,"59.94":222},"note":"All-Intra · 4:2:2 10 bit"},"XAVC S":{"kind":"fixed","rates":{"25":50,"50":50,"100":100,"23.98":50,"29.97":50,"59.94":50,"119.88":100},"note":"Long GOP · preset 4:2:2 10 bit / débit haut"}}}}}},{"id":"fx3","name":"Sony FX3","brand":"Sony","group":"SONY","sensorWidthMm":35.6,"dof":{"label":"Full Frame","cocMm":0.029,"cropToFF":1.0},"media":{"label":"FX3","modes":{"DCI 4K":{"width":4096,"height":2160,"codecs":{"XAVC S-I":{"kind":"fixed","rates":{"24":240,"25":250,"50":500,"23.98":240,"29.97":300,"59.94":600},"note":"All-Intra · 4:2:2 10 bit"}}},"UHD 4K":{"width":3840,"height":2160,"codecs":{"XAVC S-I":{"kind":"fixed","rates":{"24":240,"25":250,"50":500,"23.98":240,"29.97":300,"59.94":600},"note":"All-Intra · 4:2:2 10 bit"},"XAVC S":{"kind":"fixed","rates":{"25":140,"50":200,"100":280,"23.98":100,"29.97":140,"59.94":200,"119.88":280},"note":"Long GOP · 4:2:2 10 bit"},"XAVC HS":{"kind":"fixed","rates":{"50":200,"100":280,"23.98":100,"59.94":200,"119.88":280},"note":"HEVC Long GOP · 4:2:2 10 bit"}}},"HD":{"width":1920,"height":1080,"codecs":{"XAVC S-I":{"kind":"fixed","rates":{"25":93,"50":185,"23.98":89,"29.97":111,"59.94":222},"note":"All-Intra · 4:2:2 10 bit"},"XAVC S":{"kind":"fixed","rates":{"25":50,"50":50,"100":100,"23.98":50,"29.97":50,"59.94":50,"119.88":100},"note":"Long GOP · preset 4:2:2 10 bit / débit haut"}}}}}},{"id":"fx5","name":"Sony FX5","brand":"Sony","group":"SONY","sensorWidthMm":35.9,"dof":{"label":"Full Frame","cocMm":0.029,"cropToFF":1.0},"media":{"label":"FX5","modes":{"DCI 4K":{"width":4096,"height":2160,"codecs":{"XAVC S-I":{"kind":"fixed","rates":{"24":240,"25":250,"50":500,"23.98":240,"29.97":300,"59.94":600},"note":"All-Intra · 4:2:2 10 bit"}}},"UHD 4K":{"width":3840,"height":2160,"codecs":{"XAVC S-I":{"kind":"fixed","rates":{"24":240,"25":250,"50":500,"23.98":240,"29.97":300,"59.94":600},"note":"All-Intra · 4:2:2 10 bit"},"XAVC S-L 422":{"kind":"fixed","rates":{"25":140,"50":200,"100":280,"23.98":100,"29.97":140,"59.94":200,"119.88":280},"note":"Long GOP · 4:2:2 10 bit"},"XAVC HS-L 422":{"kind":"fixed","rates":{"50":200,"100":280,"23.98":100,"59.94":200,"119.88":280},"note":"HEVC Long GOP · 4:2:2 10 bit"}}},"HD":{"width":1920,"height":1080,"codecs":{"XAVC S-I":{"kind":"fixed","rates":{"25":93,"50":185,"23.98":89,"29.97":111,"59.94":222},"note":"All-Intra · 4:2:2 10 bit"},"XAVC S-L 422":{"kind":"fixed","rates":{"25":50,"50":50,"100":100,"23.98":50,"29.97":50,"59.94":50,"119.88":100},"note":"Long GOP · preset 4:2:2 10 bit / débit haut"}}}}}},{"id":"fx6","name":"Sony FX6","brand":"Sony","group":"SONY","sensorWidthMm":35.6,"dof":{"label":"Full Frame","cocMm":0.029,"cropToFF":1.0},"media":{"label":"FX6","modes":{"DCI 4K":{"width":4096,"height":2160,"codecs":{"XAVC-I":{"kind":"fixed","rates":{"24":240,"25":250,"50":500,"23.98":240,"29.97":300,"59.94":600},"note":"All-Intra · 4:2:2 10 bit"}}},"UHD 4K":{"width":3840,"height":2160,"codecs":{"XAVC-I":{"kind":"fixed","rates":{"24":240,"25":250,"50":500,"23.98":240,"29.97":300,"59.94":600},"note":"All-Intra · 4:2:2 10 bit"},"XAVC-L":{"kind":"fixed","rates":{"25":100,"50":150,"23.98":100,"29.97":100,"59.94":150},"note":"Long GOP · VBR"}}},"HD":{"width":1920,"height":1080,"codecs":{"XAVC-I":{"kind":"fixed","rates":{"25":93,"50":185,"23.98":89,"29.97":111,"59.94":222},"note":"All-Intra · 4:2:2 10 bit"},"XAVC-L 50":{"kind":"fixed","rates":{"25":50,"50":50,"23.98":50,"29.97":50,"59.94":50},"note":"Long GOP · VBR · 50 Mb/s max"},"XAVC-L 35":{"kind":"fixed","rates":{"25":35,"50":35,"23.98":35,"29.97":35,"59.94":35},"note":"Long GOP · VBR · 35 Mb/s max"}}}}}},{"id":"vraptor","name":"RED V-RAPTOR VV","brand":"RED","group":"ARRI / RED","sensorWidthMm":40.96,"dof":{"label":"Vista Vision","cocMm":0.033,"cropToFF":0.88}},{"id":"miniLF","name":"ARRI ALEXA Mini LF","brand":"ARRI","group":"ARRI / RED","sensorWidthMm":36.7,"dof":{"label":"Large Format","cocMm":0.03,"cropToFF":0.98},"media":{"label":"ALEXA Mini LF","modes":{"4.5K Open Gate":{"width":4448,"height":3096,"codecs":{"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 4444":{"kind":"prores","target1080":330,"note":"ProRes · débit cible VBR"},"ProRes 4444 XQ":{"kind":"prores","target1080":500,"note":"ProRes · débit cible VBR"}},"fps":["24","25","30","40"]},"UHD":{"width":3840,"height":2160,"codecs":{"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 4444":{"kind":"prores","target1080":330,"note":"ProRes · débit cible VBR"},"ProRes 4444 XQ":{"kind":"prores","target1080":500,"note":"ProRes · débit cible VBR"}},"fps":["24","25","30","48","50","60"]},"HD":{"width":1920,"height":1080,"codecs":{"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 4444":{"kind":"prores","target1080":330,"note":"ProRes · débit cible VBR"},"ProRes 4444 XQ":{"kind":"prores","target1080":500,"note":"ProRes · débit cible VBR"}},"fps":["24","25","30","48","50","60","75","90"]}}}},{"id":"alexa35","name":"ARRI ALEXA 35","brand":"ARRI","group":"ARRI / RED","sensorWidthMm":27.99,"dof":{"label":"Super 35","cocMm":0.023,"cropToFF":1.29},"media":{"label":"ALEXA 35","modes":{"4.6K Open Gate":{"width":4608,"height":3164,"codecs":{"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 4444":{"kind":"prores","target1080":330,"note":"ProRes · débit cible VBR"},"ProRes 4444 XQ":{"kind":"prores","target1080":500,"note":"ProRes · débit cible VBR"}},"fps":["24","25","30","48","50","60"]},"4K 16:9":{"width":4096,"height":2304,"codecs":{"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 4444":{"kind":"prores","target1080":330,"note":"ProRes · débit cible VBR"},"ProRes 4444 XQ":{"kind":"prores","target1080":500,"note":"ProRes · débit cible VBR"}},"fps":["24","25","30","48","50","60","75","100"]},"UHD":{"width":3840,"height":2160,"codecs":{"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 4444":{"kind":"prores","target1080":330,"note":"ProRes · débit cible VBR"},"ProRes 4444 XQ":{"kind":"prores","target1080":500,"note":"ProRes · débit cible VBR"}},"fps":["24","25","30","48","50","60","100","120"]},"HD":{"width":1920,"height":1080,"codecs":{"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 4444":{"kind":"prores","target1080":330,"note":"ProRes · débit cible VBR"},"ProRes 4444 XQ":{"kind":"prores","target1080":500,"note":"ProRes · débit cible VBR"}},"fps":["24","25","30","48","50","60","100","120"]}}}},{"id":"bmpcc4k","name":"Blackmagic Pocket Cinema Camera 4K","brand":"Blackmagic","group":"BLACKMAGIC","sensorWidthMm":18.96,"sensorHeightMm":10.0,"dof":{"label":"Four Thirds","cocMm":0.014,"cropToFF":1.9},"media":{"label":"Cinema 4K","modes":{"4K DCI":{"width":4096,"height":2160,"fps":["24","25","30","50","60"],"codecs":{"BRAW 3:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":136,"note":"Blackmagic RAW · débit constant"},"BRAW 5:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":82,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":51,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":35,"note":"Blackmagic RAW · débit constant"},"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 422":{"kind":"prores","target1080":147,"note":"ProRes · débit cible VBR"},"ProRes 422 LT":{"kind":"prores","target1080":102,"note":"ProRes · débit cible VBR"},"ProRes Proxy":{"kind":"prores","target1080":45,"note":"ProRes · débit cible VBR"}}},"UHD":{"width":3840,"height":2160,"fps":["24","25","30","50","60"],"codecs":{"BRAW 3:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":127,"note":"Blackmagic RAW · débit constant"},"BRAW 5:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":77,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":48,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":32,"note":"Blackmagic RAW · débit constant"},"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 422":{"kind":"prores","target1080":147,"note":"ProRes · débit cible VBR"},"ProRes 422 LT":{"kind":"prores","target1080":102,"note":"ProRes · débit cible VBR"},"ProRes Proxy":{"kind":"prores","target1080":45,"note":"ProRes · débit cible VBR"}}},"HD":{"width":1920,"height":1080,"fps":["24","25","30","50","60","100","120"],"codecs":{"BRAW 3:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":33,"note":"Blackmagic RAW · débit constant"},"BRAW 5:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":20,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":13,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":8.4,"note":"Blackmagic RAW · débit constant"},"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 422":{"kind":"prores","target1080":147,"note":"ProRes · débit cible VBR"},"ProRes 422 LT":{"kind":"prores","target1080":102,"note":"ProRes · débit cible VBR"},"ProRes Proxy":{"kind":"prores","target1080":45,"note":"ProRes · débit cible VBR"}}}}}},{"id":"bmpcc6k","name":"Blackmagic Pocket Cinema Camera 6K","brand":"Blackmagic","group":"BLACKMAGIC","sensorWidthMm":23.1,"sensorHeightMm":12.99,"dof":{"label":"Super 35","cocMm":0.018,"cropToFF":1.56},"media":{"label":"Cinema 6K","modes":{"6K":{"width":6144,"height":3456,"fps":["24","25","30","50"],"codecs":{"BRAW 3:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":323,"note":"Blackmagic RAW · débit constant"},"BRAW 5:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":194,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":121,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":81,"note":"Blackmagic RAW · débit constant"}}},"4K DCI":{"width":4096,"height":2160,"fps":["24","25","30","50","60"],"codecs":{"BRAW 3:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":136,"note":"Blackmagic RAW · débit constant"},"BRAW 5:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":82,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":51,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":35,"note":"Blackmagic RAW · débit constant"},"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 422":{"kind":"prores","target1080":147,"note":"ProRes · débit cible VBR"},"ProRes 422 LT":{"kind":"prores","target1080":102,"note":"ProRes · débit cible VBR"},"ProRes Proxy":{"kind":"prores","target1080":45,"note":"ProRes · débit cible VBR"}}},"UHD":{"width":3840,"height":2160,"fps":["24","25","30","50","60"],"codecs":{"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 422":{"kind":"prores","target1080":147,"note":"ProRes · débit cible VBR"},"ProRes 422 LT":{"kind":"prores","target1080":102,"note":"ProRes · débit cible VBR"},"ProRes Proxy":{"kind":"prores","target1080":45,"note":"ProRes · débit cible VBR"}}},"HD":{"width":1920,"height":1080,"fps":["24","25","30","50","60"],"codecs":{"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 422":{"kind":"prores","target1080":147,"note":"ProRes · débit cible VBR"},"ProRes 422 LT":{"kind":"prores","target1080":102,"note":"ProRes · débit cible VBR"},"ProRes Proxy":{"kind":"prores","target1080":45,"note":"ProRes · débit cible VBR"}}}}}},{"id":"ursamp46kg2","name":"Blackmagic URSA Mini Pro 4.6K G2","brand":"Blackmagic","group":"BLACKMAGIC","sensorWidthMm":25.34,"sensorHeightMm":14.25,"dof":{"label":"Super 35","cocMm":0.019,"cropToFF":1.42},"media":{"label":"URSA Mini Pro 4.6K","modes":{"4.6K":{"width":4608,"height":2592,"fps":["24","25","30","50","60","100","120"],"codecs":{"BRAW 3:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":183,"note":"Blackmagic RAW · débit constant"},"BRAW 5:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":110,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":68,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":46,"note":"Blackmagic RAW · débit constant"},"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 422":{"kind":"prores","target1080":147,"note":"ProRes · débit cible VBR"},"ProRes 422 LT":{"kind":"prores","target1080":102,"note":"ProRes · débit cible VBR"},"ProRes Proxy":{"kind":"prores","target1080":45,"note":"ProRes · débit cible VBR"}}},"UHD":{"width":3840,"height":2160,"fps":["24","25","30","50","60","100","120"],"codecs":{"BRAW 3:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":127,"note":"Blackmagic RAW · débit constant"},"BRAW 5:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":76,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":48,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":32,"note":"Blackmagic RAW · débit constant"},"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 422":{"kind":"prores","target1080":147,"note":"ProRes · débit cible VBR"},"ProRes 422 LT":{"kind":"prores","target1080":102,"note":"ProRes · débit cible VBR"},"ProRes Proxy":{"kind":"prores","target1080":45,"note":"ProRes · débit cible VBR"}}},"HD":{"width":1920,"height":1080,"fps":["24","25","30","50","60","100","120"],"codecs":{"BRAW 3:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":33,"note":"Blackmagic RAW · débit constant"},"BRAW 5:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":20,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":12,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":30,"baseMBps":8,"note":"Blackmagic RAW · débit constant"},"ProRes 422 HQ":{"kind":"prores","target1080":220,"note":"ProRes · débit cible VBR"},"ProRes 422":{"kind":"prores","target1080":147,"note":"ProRes · débit cible VBR"},"ProRes 422 LT":{"kind":"prores","target1080":102,"note":"ProRes · débit cible VBR"},"ProRes Proxy":{"kind":"prores","target1080":45,"note":"ProRes · débit cible VBR"}}}}}},{"id":"ursamp12k","name":"Blackmagic URSA Mini Pro 12K","brand":"Blackmagic","group":"BLACKMAGIC","sensorWidthMm":27.03,"sensorHeightMm":14.25,"dof":{"label":"Super 35","cocMm":0.02,"cropToFF":1.33},"media":{"label":"URSA Mini Pro 12K","modes":{"12K":{"width":12288,"height":6480,"fps":["24","25","30","50","60"],"codecs":{"BRAW 5:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":578,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":361,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":241,"note":"Blackmagic RAW · débit constant"},"BRAW 18:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":160,"note":"Blackmagic RAW · débit constant"}}},"8K":{"width":8192,"height":4320,"fps":["24","25","30","50","60","100","120"],"codecs":{"BRAW 5:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":257,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":161,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":107,"note":"Blackmagic RAW · débit constant"},"BRAW 18:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":71,"note":"Blackmagic RAW · débit constant"}}},"6K S16":{"width":6144,"height":3240,"fps":["24","25","30","50","60","100","120"],"codecs":{"BRAW 5:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":146,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":91,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":61,"note":"Blackmagic RAW · débit constant"},"BRAW 18:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":40,"note":"Blackmagic RAW · débit constant"}}},"4K":{"width":4096,"height":2160,"fps":["24","25","30","50","60","100","120"],"codecs":{"BRAW 5:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":161,"note":"Blackmagic RAW · débit constant"},"BRAW 8:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":107,"note":"Blackmagic RAW · débit constant"},"BRAW 12:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":80,"note":"Blackmagic RAW · débit constant"},"BRAW 18:1":{"kind":"scaledMBps","baseFps":24,"baseMBps":53,"note":"Blackmagic RAW · débit constant"}}}}}},{"id":"ff","name":"Full Frame 36 mm","brand":"Générique","group":"GÉNÉRIQUE","sensorWidthMm":36.0,"dof":{"label":"Full Frame","cocMm":0.029,"cropToFF":1.0}},{"id":"s35","name":"Super 35","brand":"Générique","group":"GÉNÉRIQUE","sensorWidthMm":24.89,"dof":{"label":"Super 35","cocMm":0.019,"cropToFF":1.5}},{"id":"apsc","name":"APS-C","brand":"Générique","group":"GÉNÉRIQUE","sensorWidthMm":23.5,"dof":{"label":"APS-C","cocMm":0.019,"cropToFF":1.53}},{"id":"mft","name":"Micro 4/3","brand":"Générique","group":"GÉNÉRIQUE","sensorWidthMm":17.3,"dof":{"label":"Micro 4/3","cocMm":0.014,"cropToFF":2.08}},{"id":"oneinch","name":"1 pouce","brand":"Générique","group":"GÉNÉRIQUE","sensorWidthMm":13.2,"dof":{"label":"1 pouce","cocMm":0.011,"cropToFF":2.73}}],"notes":"V1.1: profils MEDIA centralisés + Blackmagic ajoutées à la liste commune."};
 
-  const sonyAllI4K = {
-    kind: 'fixed',
-    rates: { '23.98': 240, '24': 240, '25': 250, '29.97': 300, '50': 500, '59.94': 600 },
-    note: 'All-Intra · 4:2:2 10 bit'
-  };
-  const sonyAllIHD = {
-    kind: 'fixed',
-    rates: { '23.98': 89, '25': 93, '29.97': 111, '50': 185, '59.94': 222 },
-    note: 'All-Intra · 4:2:2 10 bit'
-  };
-  const sonyS4K = {
-    kind: 'fixed',
-    rates: { '23.98': 100, '25': 140, '29.97': 140, '50': 200, '59.94': 200, '100': 280, '119.88': 280 },
-    note: 'Long GOP · 4:2:2 10 bit'
-  };
-  const sonyHS4K = {
-    kind: 'fixed',
-    rates: { '23.98': 100, '50': 200, '59.94': 200, '100': 280, '119.88': 280 },
-    note: 'HEVC Long GOP · 4:2:2 10 bit'
-  };
-  const sonySHD = {
-    kind: 'fixed',
-    rates: { '23.98': 50, '25': 50, '29.97': 50, '50': 50, '59.94': 50, '100': 100, '119.88': 100 },
-    note: 'Long GOP · preset 4:2:2 10 bit / débit haut'
-  };
-
-  function sonyMirrorCamera(codecNames = { allI:'XAVC S-I', long:'XAVC S', hs:'XAVC HS' }) {
-    return {
-      'DCI 4K': { width:4096, height:2160, codecs: { [codecNames.allI]: sonyAllI4K } },
-      'UHD 4K': { width:3840, height:2160, codecs: {
-        [codecNames.allI]: sonyAllI4K,
-        [codecNames.long]: sonyS4K,
-        [codecNames.hs]: sonyHS4K,
-      }},
-      'HD': { width:1920, height:1080, codecs: {
-        [codecNames.allI]: sonyAllIHD,
-        [codecNames.long]: sonySHD,
-      }},
-    };
+  function sharedDbToMediaDb(data) {
+    if (!data || !Array.isArray(data.cameras)) return null;
+    const grouped = {};
+    for (const camera of data.cameras) {
+      if (!camera?.media?.modes) continue;
+      const brand = String(camera.brand || camera.group || 'AUTRES').toUpperCase();
+      const label = String(camera.media.label || camera.name || camera.id);
+      grouped[brand] ||= {};
+      grouped[brand][label] = camera.media.modes;
+    }
+    return Object.keys(grouped).length ? grouped : null;
   }
 
-  function proResSpec(name, note='ProRes · débit cible VBR') {
-    return { kind:'prores', target1080:PRORES_TARGET_1080_2997[name], note };
-  }
-  function brawSpec(baseFps, baseMBps, note='Blackmagic RAW · débit constant') {
-    return { kind:'scaledMBps', baseFps, baseMBps, note };
+  let CAMERA_DB = sharedDbToMediaDb(FALLBACK_SHARED_CAMERA_DB) || {};
+
+  function applySharedCameraDb(data) {
+    const next = sharedDbToMediaDb(data);
+    if (!next) return false;
+    CAMERA_DB = next;
+    return true;
   }
 
-  const CAMERA_DB = {
-    'SONY': {
-      'FX30': sonyMirrorCamera(),
-      'FX3': sonyMirrorCamera(),
-      'FX5': sonyMirrorCamera({ allI:'XAVC S-I', long:'XAVC S-L 422', hs:'XAVC HS-L 422' }),
-      'FX6': {
-        'DCI 4K': { width:4096, height:2160, codecs:{ 'XAVC-I': sonyAllI4K } },
-        'UHD 4K': { width:3840, height:2160, codecs:{
-          'XAVC-I': sonyAllI4K,
-          'XAVC-L': { kind:'fixed', rates:{ '23.98':100, '25':100, '29.97':100, '50':150, '59.94':150 }, note:'Long GOP · VBR' }
-        }},
-        'HD': { width:1920, height:1080, codecs:{
-          'XAVC-I': sonyAllIHD,
-          'XAVC-L 50': { kind:'fixed', rates:{ '23.98':50, '25':50, '29.97':50, '50':50, '59.94':50 }, note:'Long GOP · VBR · 50 Mb/s max' },
-          'XAVC-L 35': { kind:'fixed', rates:{ '23.98':35, '25':35, '29.97':35, '50':35, '59.94':35 }, note:'Long GOP · VBR · 35 Mb/s max' },
-        }},
-      },
-    },
-    'ARRI': {
-      'ALEXA 35': {
-        '4.6K Open Gate': { width:4608, height:3164, codecs:{
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 4444': proResSpec('ProRes 4444'), 'ProRes 4444 XQ': proResSpec('ProRes 4444 XQ')
-        }, fps:['24','25','30','48','50','60'] },
-        '4K 16:9': { width:4096, height:2304, codecs:{
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 4444': proResSpec('ProRes 4444'), 'ProRes 4444 XQ': proResSpec('ProRes 4444 XQ')
-        }, fps:['24','25','30','48','50','60','75','100'] },
-        'UHD': { width:3840, height:2160, codecs:{
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 4444': proResSpec('ProRes 4444'), 'ProRes 4444 XQ': proResSpec('ProRes 4444 XQ')
-        }, fps:['24','25','30','48','50','60','100','120'] },
-        'HD': { width:1920, height:1080, codecs:{
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 4444': proResSpec('ProRes 4444'), 'ProRes 4444 XQ': proResSpec('ProRes 4444 XQ')
-        }, fps:['24','25','30','48','50','60','100','120'] },
-      },
-      'ALEXA Mini LF': {
-        '4.5K Open Gate': { width:4448, height:3096, codecs:{
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 4444': proResSpec('ProRes 4444'), 'ProRes 4444 XQ': proResSpec('ProRes 4444 XQ')
-        }, fps:['24','25','30','40'] },
-        'UHD': { width:3840, height:2160, codecs:{
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 4444': proResSpec('ProRes 4444'), 'ProRes 4444 XQ': proResSpec('ProRes 4444 XQ')
-        }, fps:['24','25','30','48','50','60'] },
-        'HD': { width:1920, height:1080, codecs:{
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 4444': proResSpec('ProRes 4444'), 'ProRes 4444 XQ': proResSpec('ProRes 4444 XQ')
-        }, fps:['24','25','30','48','50','60','75','90'] },
-      },
-    },
-    'BLACKMAGIC': {
-      'Cinema 4K': {
-        '4K DCI': { width:4096, height:2160, fps:['24','25','30','50','60'], codecs:{
-          'BRAW 3:1': brawSpec(30,136), 'BRAW 5:1': brawSpec(30,82), 'BRAW 8:1': brawSpec(30,51), 'BRAW 12:1': brawSpec(30,35),
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 422': proResSpec('ProRes 422'), 'ProRes 422 LT': proResSpec('ProRes 422 LT'), 'ProRes Proxy': proResSpec('ProRes 422 Proxy')
-        }},
-        'UHD': { width:3840, height:2160, fps:['24','25','30','50','60'], codecs:{
-          'BRAW 3:1': brawSpec(30,127), 'BRAW 5:1': brawSpec(30,77), 'BRAW 8:1': brawSpec(30,48), 'BRAW 12:1': brawSpec(30,32),
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 422': proResSpec('ProRes 422'), 'ProRes 422 LT': proResSpec('ProRes 422 LT'), 'ProRes Proxy': proResSpec('ProRes 422 Proxy')
-        }},
-        'HD': { width:1920, height:1080, fps:['24','25','30','50','60','100','120'], codecs:{
-          'BRAW 3:1': brawSpec(30,33), 'BRAW 5:1': brawSpec(30,20), 'BRAW 8:1': brawSpec(30,13), 'BRAW 12:1': brawSpec(30,8.4),
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 422': proResSpec('ProRes 422'), 'ProRes 422 LT': proResSpec('ProRes 422 LT'), 'ProRes Proxy': proResSpec('ProRes 422 Proxy')
-        }},
-      },
-      'Cinema 6K': {
-        '6K': { width:6144, height:3456, fps:['24','25','30','50'], codecs:{
-          'BRAW 3:1': brawSpec(30,323), 'BRAW 5:1': brawSpec(30,194), 'BRAW 8:1': brawSpec(30,121), 'BRAW 12:1': brawSpec(30,81)
-        }},
-        '4K DCI': { width:4096, height:2160, fps:['24','25','30','50','60'], codecs:{
-          'BRAW 3:1': brawSpec(30,136), 'BRAW 5:1': brawSpec(30,82), 'BRAW 8:1': brawSpec(30,51), 'BRAW 12:1': brawSpec(30,35),
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 422': proResSpec('ProRes 422'), 'ProRes 422 LT': proResSpec('ProRes 422 LT'), 'ProRes Proxy': proResSpec('ProRes 422 Proxy')
-        }},
-        'UHD': { width:3840, height:2160, fps:['24','25','30','50','60'], codecs:{
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 422': proResSpec('ProRes 422'), 'ProRes 422 LT': proResSpec('ProRes 422 LT'), 'ProRes Proxy': proResSpec('ProRes 422 Proxy')
-        }},
-        'HD': { width:1920, height:1080, fps:['24','25','30','50','60'], codecs:{
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 422': proResSpec('ProRes 422'), 'ProRes 422 LT': proResSpec('ProRes 422 LT'), 'ProRes Proxy': proResSpec('ProRes 422 Proxy')
-        }},
-      },
-      'URSA Mini Pro 4.6K': {
-        '4.6K': { width:4608, height:2592, fps:['24','25','30','50','60','100','120'], codecs:{
-          'BRAW 3:1': brawSpec(30,183), 'BRAW 5:1': brawSpec(30,110), 'BRAW 8:1': brawSpec(30,68), 'BRAW 12:1': brawSpec(30,46),
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 422': proResSpec('ProRes 422'), 'ProRes 422 LT': proResSpec('ProRes 422 LT'), 'ProRes Proxy': proResSpec('ProRes 422 Proxy')
-        }},
-        'UHD': { width:3840, height:2160, fps:['24','25','30','50','60','100','120'], codecs:{
-          'BRAW 3:1': brawSpec(30,127), 'BRAW 5:1': brawSpec(30,76), 'BRAW 8:1': brawSpec(30,48), 'BRAW 12:1': brawSpec(30,32),
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 422': proResSpec('ProRes 422'), 'ProRes 422 LT': proResSpec('ProRes 422 LT'), 'ProRes Proxy': proResSpec('ProRes 422 Proxy')
-        }},
-        'HD': { width:1920, height:1080, fps:['24','25','30','50','60','100','120'], codecs:{
-          'BRAW 3:1': brawSpec(30,33), 'BRAW 5:1': brawSpec(30,20), 'BRAW 8:1': brawSpec(30,12), 'BRAW 12:1': brawSpec(30,8),
-          'ProRes 422 HQ': proResSpec('ProRes 422 HQ'), 'ProRes 422': proResSpec('ProRes 422'), 'ProRes 422 LT': proResSpec('ProRes 422 LT'), 'ProRes Proxy': proResSpec('ProRes 422 Proxy')
-        }},
-      },
-      'URSA Mini Pro 12K': {
-        '12K': { width:12288, height:6480, fps:['24','25','30','50','60'], codecs:{
-          'BRAW 5:1': brawSpec(24,578), 'BRAW 8:1': brawSpec(24,361), 'BRAW 12:1': brawSpec(24,241), 'BRAW 18:1': brawSpec(24,160)
-        }},
-        '8K': { width:8192, height:4320, fps:['24','25','30','50','60','100','120'], codecs:{
-          'BRAW 5:1': brawSpec(24,257), 'BRAW 8:1': brawSpec(24,161), 'BRAW 12:1': brawSpec(24,107), 'BRAW 18:1': brawSpec(24,71)
-        }},
-        '6K S16': { width:6144, height:3240, fps:['24','25','30','50','60','100','120'], codecs:{
-          'BRAW 5:1': brawSpec(24,146), 'BRAW 8:1': brawSpec(24,91), 'BRAW 12:1': brawSpec(24,61), 'BRAW 18:1': brawSpec(24,40)
-        }},
-        '4K': { width:4096, height:2160, fps:['24','25','30','50','60','100','120'], codecs:{
-          'BRAW 5:1': brawSpec(24,161), 'BRAW 8:1': brawSpec(24,107), 'BRAW 12:1': brawSpec(24,80), 'BRAW 18:1': brawSpec(24,53)
-        }},
-      },
-    },
-  };
+  function loadCachedSharedCameraDb() {
+    try {
+      const cached = JSON.parse(localStorage.getItem(CAMERA_DB_CACHE_KEY) || 'null');
+      if (cached) applySharedCameraDb(cached);
+    } catch (_) {}
+  }
+
+  async function refreshSharedCameraDb() {
+    try {
+      const res = await fetch(CAMERA_DB_URL, { cache:'no-store' });
+      if (!res.ok) throw new Error(`camera db ${res.status}`);
+      const data = await res.json();
+      if (!applySharedCameraDb(data)) throw new Error('invalid camera db');
+      try { localStorage.setItem(CAMERA_DB_CACHE_KEY, JSON.stringify(data)); } catch (_) {}
+      renderCameraWizard();
+      updateCameraPresetSummary();
+    } catch (_) {}
+  }
 
   const wizardState = { brand:null, camera:null, resolution:null, codec:null, fps:null };
 
@@ -520,7 +402,7 @@
   function updateCameraPresetSummary() {
     if (!state.cameraPreset) {
       $('cameraPresetSummary').textContent = 'Choisir une caméra';
-      $('cameraPresetSummaryDetail').textContent = 'Sony · ARRI · Blackmagic';
+      $('cameraPresetSummaryDetail').textContent = Object.keys(CAMERA_DB).map(x => x === 'BLACKMAGIC' ? 'Blackmagic' : x[0] + x.slice(1).toLowerCase()).join(' · ');
       return;
     }
     $('cameraPresetSummary').textContent = cameraSelectionLabel(state.cameraPreset);
@@ -779,11 +661,13 @@
   setTheme(storedTheme || 'light');
   syncBitrateUnitUI();
   setBitrateInputFromMbps(250);
+  loadCachedSharedCameraDb();
   renderCameraWizard();
   updateCameraPresetSummary();
   renderPresets();
   switchMode('card');
   updateAll();
+  refreshSharedCameraDb();
 
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
     window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
