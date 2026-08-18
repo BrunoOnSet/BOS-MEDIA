@@ -34,3 +34,7 @@ V2.4 — BOS CAMERA DB
 - Les presets d'enregistrement Sony, ARRI et Blackmagic sont stockés dans le bloc `media` de chaque caméra.
 - Fallback embarqué + cache local : MEDIA reste utilisable hors ligne.
 - Métadonnées PWA harmonisées en BRUNO ONSET / MEDIA et MEDIA - BOS.
+
+
+V2.5 — DARK HEADER FIX
+- Header uses the BOS dark background (#111418) and dark border (#25292E) in dark mode.

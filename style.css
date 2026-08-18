@@ -35,6 +35,8 @@ html[data-theme="dark"]{
   --stepper-bg:#62A9B5;
   --danger:#E08B84;
   --shadow:none;
+  --header-bg:#111418;
+  --header-border:#25292E;
 }
 *{box-sizing:border-box}
 html{background:var(--bg);color-scheme:light dark}
