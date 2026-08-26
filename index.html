@@ -8,12 +8,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="MEDIA - BOS" />
   <title>BOS — Bruno OnSet · MEDIA</title>
-  <link rel="manifest" href="manifest.webmanifest?v=2.7" />
+  <link rel="manifest" href="manifest.webmanifest?v=2.8" />
   <link rel="apple-touch-icon" href="icon-192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2.7" />
+  <link rel="stylesheet" href="style.css?v=2.8" />
 </head>
 <body>
   <main class="app shell" id="mainApp">
@@ -50,7 +50,6 @@
       <button class="utility-link" id="tipsBtn" type="button">TIPS</button>
     </div>
 
-    <div class="media-app-title" aria-label="Application MEDIA">MEDIA</div>
 
     <section class="panel bitrate-panel" id="bitratePanel">
       <div class="panel-head">
@@ -107,7 +106,7 @@
     <section class="media-modules" id="mediaModules" aria-label="Outils MEDIA">
       <article class="module open" data-module="card">
         <button class="module-head" type="button" data-module-toggle="card" aria-expanded="true" aria-controls="cardModuleBody">
-          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><strong>CARTE</strong><small>durée</small></span></span>
+          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><div class="module-title-line"><span class="module-number">02</span><strong>CARTE</strong></div><small>durée</small></span></span>
           <span class="chev" aria-hidden="true">⌄</span>
         </button>
         <div class="module-body" id="cardModuleBody">
@@ -167,14 +166,14 @@
 
       <article class="module" data-module="shoot">
         <button class="module-head" type="button" data-module-toggle="shoot" aria-expanded="false" aria-controls="shootModuleBody">
-          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><strong>TOURNAGE</strong><small>stockage</small></span></span>
+          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><div class="module-title-line"><span class="module-number">03</span><strong>TOURNAGE</strong></div><small>stockage</small></span></span>
           <span class="chev" aria-hidden="true">⌄</span>
         </button>
         <div class="module-body" id="shootModuleBody" hidden>
 <section class="panel">
         <div class="panel-head">
           <div>
-            <div class="panel-kicker"><span class="section-number">02</span>TOURNAGE</div>
+            <div class="panel-kicker"><span class="section-number">03</span>TOURNAGE</div>
             <div class="panel-subtitle">Combien de stockage faut-il prévoir ?</div>
           </div>
           <button class="small-action" data-reset="shoot" type="button">RESET</button>
@@ -233,14 +232,14 @@
 
       <article class="module" data-module="copy">
         <button class="module-head" type="button" data-module-toggle="copy" aria-expanded="false" aria-controls="copyModuleBody">
-          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><strong>COPIE</strong><small>temps</small></span></span>
+          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><div class="module-title-line"><span class="module-number">04</span><strong>COPIE</strong></div><small>temps</small></span></span>
           <span class="chev" aria-hidden="true">⌄</span>
         </button>
         <div class="module-body" id="copyModuleBody" hidden>
 <section class="panel">
         <div class="panel-head">
           <div>
-            <div class="panel-kicker"><span class="section-number">02</span>COPIE</div>
+            <div class="panel-kicker"><span class="section-number">04</span>COPIE</div>
             <div class="panel-subtitle">Combien de temps avant de pouvoir démonter ?</div>
           </div>
           <button class="small-action" data-reset="copy" type="button">RESET</button>
@@ -319,7 +318,7 @@
     <div class="feedback-contact">
       <a class="feedback-contact-link" href="mailto:brunoguillardcontact@gmail.com?subject=Suggestion%20%E2%80%94%20BOS%20MEDIA&body=Bonjour%20Bruno%2C%0A%0AJ%E2%80%99ai%20une%20id%C3%A9e%20pour%20am%C3%A9liorer%20MEDIA%20%3A%0A%0A">Une idée pour améliorer l’application ? <span aria-hidden="true">→</span></a>
     </div>
-    <footer class="footer">BOS — Bruno OnSet · MEDIA V2.6</footer>
+    <footer class="footer">BOS — Bruno OnSet · MEDIA V2.8</footer>
   </main>
 
   <dialog id="installDialog" class="sheet install-sheet">
@@ -438,6 +437,6 @@
     </form>
   </dialog>
 
-  <script src="app.js?v=2.7"></script>
+  <script src="app.js?v=2.8"></script>
 </body>
 </html>

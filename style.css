@@ -263,3 +263,15 @@ html[data-theme="dark"] .primary-action{background:#7FA7B0;color:#101315}
 .module .panel-head{margin-bottom:16px}
 @media(max-width:430px){.module-head{padding:14px 16px}.module-body{padding:0 16px 16px}}
 @media(max-width:355px){.module-head{padding:13px 14px}.module-body{padding:0 14px 14px}}
+
+
+/* V2.8 — suppression du grand titre MEDIA + espacements + numérotation V64 */
+.media-app-title{display:none!important}
+.bitrate-panel{margin-top:0!important}
+.media-modules{margin-top:13px;gap:13px}
+.module-title>span{min-width:0}
+.module-title-line{display:flex;align-items:center;gap:8px;min-width:0}
+.module-number{display:inline-block;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.12em;font-variant-numeric:tabular-nums}
+.module-title strong,.panel-kicker,.result-label,.recommendation-kicker,.camera-preset-label,.wizard-label{font-size:10px;letter-spacing:.16em;font-weight:900;color:var(--accent)}
+.module-title small,.panel-subtitle{font-size:10px;color:var(--muted)}
+@media(max-width:430px){.media-modules{margin-top:12px}.module-number{font-size:9px}}
