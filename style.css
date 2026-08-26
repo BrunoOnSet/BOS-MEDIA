@@ -343,3 +343,9 @@ html[data-theme="dark"] .primary-action{background:#7FA7B0;color:#101315}
 /* V2.12 — tête de bulle recollée à BOS_LIGHT_V0_62 : alignement du bloc titre à gauche */
 .module-head.card-heading{justify-content:flex-start!important}
 .card-heading .heading-copy{flex:1 1 auto;max-width:none}
+
+
+/* V2.13 — toutes les bulles dans un seul flux pour uniformiser les espacements */
+.media-modules-top{display:none!important}
+.media-modules{display:flex;flex-direction:column;gap:12px!important;margin-top:12px!important;margin-bottom:2px!important}
+.media-modules > .module{margin:0!important}
