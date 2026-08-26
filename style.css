@@ -114,3 +114,132 @@ html:not([data-theme="dark"]) .footer-logo{filter:invert(1)}
 .topbar h1{font-size:27px;line-height:1.05;margin:10px 0 0;letter-spacing:-.03em}.mode-btn,.firmware-pill,.utility-note{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;padding:7px 10px;font-size:9px;letter-spacing:.12em;font-weight:900;white-space:nowrap}
 .mode-btn:hover{border-color:var(--accent)}.utility-row{display:flex;align-items:center;gap:7px;margin:-1px 0 14px;padding:0 2px}.utility-note{background:transparent;color:var(--muted)}
 .top-title .tool-eyebrow{text-decoration:none;color:inherit}
+
+/* =========================================================
+   V2.6 — DA BOS strictement alignée sur BOS_BRUNO_ONSET_V64
+   Fonctionnalités MEDIA conservées, overrides visuels seulement.
+   ========================================================= */
+:root{
+  --bg:#F3F1EC;
+  --panel:#FFFFFF;
+  --panel2:#ECEBE7;
+  --field-bg:#FAFAF8;
+  --text:#17191C;
+  --muted:#6E737A;
+  --line:#D3D4D1;
+  --card-border:#D7D9D6;
+  --accent:#2F5B66;
+  --accent-soft:rgba(47,91,102,.14);
+  --accent-strong:#2F5B66;
+  --chip-active-bg:#92B8C0;
+  --chip-active-text:#182126;
+  --danger:#C94B4B;
+  --shadow:none;
+  --header-bg:#EBE7DE;
+  --header-border:#D3CDC2;
+}
+html[data-theme="dark"]{
+  --bg:#0B0C0E;
+  --panel:#15171A;
+  --panel2:#1C1F23;
+  --field-bg:#0F1113;
+  --text:#F3F3F0;
+  --muted:#94989F;
+  --line:#30343A;
+  --card-border:#25292E;
+  --accent:#2F5B66;
+  --accent-soft:rgba(47,91,102,.22);
+  --accent-strong:#2F5B66;
+  --chip-active-bg:#2F5B66;
+  --chip-active-text:#F3F3F0;
+  --danger:#FF6A6A;
+  --shadow:none;
+  --header-bg:#111418;
+  --header-border:#25292E;
+}
+html,body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Roboto","Segoe UI",sans-serif}
+.app.shell{width:min(620px,100%);max-width:620px;margin:0 auto;padding:calc(22px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom))}
+.cardlike,.panel,.result,.sheet{border:1px solid var(--card-border);box-shadow:none}
+
+/* Header V64 */
+.topbar{background:var(--header-bg);border:1px solid var(--header-border);border-radius:22px;padding:14px 16px 15px;margin-bottom:2px!important;position:static}
+.top-inner,.bos-top-inner{width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.bos-brand-lockup{display:flex;align-items:center;gap:12px;min-width:0}
+.bos-header-logo{display:block;width:56px;height:56px;object-fit:contain;flex:0 0 56px;background:transparent;border:0;border-radius:0}
+.bos-brand-text{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
+.bos-header-name{font-family:"Montserrat",Arial,sans-serif;font-weight:700;font-size:19px;line-height:1;color:#2F5B66;letter-spacing:0;white-space:nowrap}
+.bos-header-tagline{font-family:"Montserrat",Arial,sans-serif;font-weight:400;font-size:11px;line-height:1.2;color:#17191C;letter-spacing:0;white-space:nowrap}
+html[data-theme="dark"] .bos-header-name{color:#2F5B66}
+html[data-theme="dark"] .bos-header-tagline{color:#9AA2A9}
+.bos-top-actions{display:flex;gap:8px;align-items:flex-start}
+.mode-btn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;padding:7px 10px;min-height:auto;font-size:9px;letter-spacing:.12em;font-weight:900;white-space:nowrap}
+.mode-btn:hover{border-color:var(--accent)}
+.media-app-title{font-family:"Montserrat",Arial,sans-serif;font-size:27px;line-height:1.05;letter-spacing:-.03em;font-weight:700;color:var(--text);margin:4px 2px 12px}
+
+/* Top actions V64 */
+.install-app-row{display:flex;justify-content:flex-start;margin:0 2px 0!important}
+.install-app-row[hidden]{display:none!important}
+.install-app-btn{border:0;background:transparent;color:#2F5B66;padding:4px 0;font-family:"Montserrat",Arial,sans-serif;font-size:10px;line-height:1.3;font-weight:700;letter-spacing:.08em;cursor:pointer;text-transform:uppercase}
+.install-app-btn span{display:inline-block;margin-left:4px;transition:transform .16s ease}
+.install-app-btn:hover span{transform:translateX(3px)}
+.install-app-btn:focus-visible{outline:2px solid #2F5B66;outline-offset:4px;border-radius:3px}
+html[data-theme="dark"] .install-app-btn{color:#7FA7B0}
+.project-contact{display:flex;justify-content:flex-start;padding:2px 0 2px!important;margin:0 2px 0!important}
+.project-contact-btn{border:0;background:transparent;color:#2F5B66;padding:8px 2px;font-family:"Montserrat",Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:.01em;cursor:pointer}
+.project-contact-btn span{display:inline-block;margin-left:5px;transition:transform .16s ease}
+.project-contact-btn:hover span{transform:translateX(3px)}
+.project-contact-btn:focus-visible{outline:2px solid #2F5B66;outline-offset:5px;border-radius:4px}
+html[data-theme="dark"] .project-contact-btn{color:#7FA7B0}
+.utility-row.bos-utility-row{display:flex;align-items:center;justify-content:flex-start;gap:7px;margin-top:0!important;margin-bottom:12px!important;padding:0 2px}
+.utility-link,.small-action{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;padding:7px 10px;font-size:9px;letter-spacing:.12em;font-weight:900;white-space:nowrap}
+.utility-link:hover,.small-action:hover{border-color:var(--accent)}
+
+/* MEDIA controls translated into the V64 visual language */
+.mode-panel{margin:0 0 13px}
+.mode-tabs{gap:7px}
+.mode-tabs button{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:16px;padding:12px 7px;box-shadow:none}
+.mode-tabs button span{font-size:11px;font-weight:900;letter-spacing:.07em}
+.mode-tabs button small{font-size:9px;color:var(--muted)}
+.mode-tabs button.active{background:var(--chip-active-bg);border-color:var(--chip-active-bg);color:var(--chip-active-text)}
+.mode-tabs button.active small{color:var(--chip-active-text);opacity:.72}
+.panel,.result{background:var(--panel);border-radius:22px;margin-top:13px}
+.panel{padding:18px}
+.panel-head{margin-bottom:16px}
+.panel-kicker,.result-label,.recommendation-kicker{font-size:10px;letter-spacing:.16em;font-weight:900;color:var(--accent)}
+.section-number{display:inline-block;margin-right:8px;color:var(--muted);font-variant-numeric:tabular-nums}
+.panel-subtitle{margin-top:4px;color:var(--muted);font-size:10px;line-height:1.35}
+.hero-field>label{font-size:11px;font-weight:800;letter-spacing:.05em;color:var(--muted)}
+.number-unit-field{background:var(--field-bg);border:1px solid var(--line);border-radius:14px}
+.number-unit-field:focus-within{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.segmented{background:var(--panel2);border:1px solid var(--line)}
+.segmented button.active{background:var(--chip-active-bg);color:var(--chip-active-text)}
+.quick-chips button,.wizard-chips button{border:1px solid var(--line);background:var(--panel2);color:var(--muted);font-weight:800}
+.quick-chips button.active,.wizard-chips button.active{background:var(--chip-active-bg);border-color:var(--chip-active-bg);color:var(--chip-active-text)}
+.camera-preset-label,.wizard-label{font-size:10px;letter-spacing:.16em;font-weight:900;color:var(--accent)}
+.camera-preset-summary,.preset-row select,.advanced-box{background:var(--field-bg);border-color:var(--line)}
+.camera-preset-summary{border-radius:14px}
+.camera-preset-summary b{color:var(--accent)}
+.advanced-box{border-radius:14px}
+.mini-number-unit{background:var(--panel2);border-color:var(--line)}
+.result-hero{background:linear-gradient(180deg,var(--accent-soft),transparent)}
+.recommendation{border-color:var(--accent);background:var(--accent-soft)}
+.primary-action{border-radius:999px;background:var(--accent);font-family:"Montserrat",Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em}
+html[data-theme="dark"] .primary-action{background:#7FA7B0;color:#101315}
+
+/* Dialogs V64 */
+.sheet{width:min(540px,calc(100% - 20px));max-width:none;border:0;padding:0;border-radius:22px;background:var(--panel);color:var(--text);box-shadow:0 25px 90px rgba(0,0,0,.35)}
+.sheet::backdrop,dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(3px)}
+.sheet-inner{padding:16px}.sheet-head{display:flex;justify-content:space-between;align-items:center}.sheet-head>div{display:flex;flex-direction:column}.sheet-head strong{font-size:18px}.sheet-head small{font-size:11px;color:var(--muted);margin-top:3px}.iconbtn{border:1px solid var(--line);background:var(--panel2);width:38px;height:38px;border-radius:12px;display:grid;place-items:center;cursor:pointer;font-size:19px}.sheet-actions{display:flex;gap:8px;margin-top:14px}.sheet-actions>*{flex:1}.primary{border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:999px;min-height:34px;padding:7px 12px;font-size:10px;letter-spacing:.08em;font-weight:900}.install-sheet-inner{padding:20px}.install-help{margin-top:16px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);font-size:12px;line-height:1.55}.install-help p{margin:0}.install-help p+p{margin-top:8px}
+.project-sheet{width:min(470px,calc(100% - 24px))}.project-sheet-inner{padding:22px}.project-sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.project-kicker{display:block;color:#2F5B66;font-size:9px;font-weight:900;letter-spacing:.16em;margin-bottom:7px}.project-close{flex:0 0 38px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--text);font-size:23px;line-height:1;cursor:pointer}.project-profile{display:flex;flex-direction:column;gap:4px;margin-top:24px}.project-profile strong{font-size:14px;color:var(--text)}.project-profile span{font-size:11px;color:var(--muted);line-height:1.4}.project-services{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.project-services span{border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:var(--text);background:var(--panel2);font-size:10px;font-weight:700}.project-note{margin:18px 0 0;color:var(--muted);font-size:11px;line-height:1.55}.project-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:18px}.project-email-btn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 15px;border:1px solid #2F5B66;border-radius:999px;background:#2F5B66;color:#fff;text-decoration:none;font-family:"Montserrat",Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:.01em}.project-email-btn span{transition:transform .16s ease}.project-email-btn:hover span{transform:translateX(3px)}html[data-theme="dark"] .project-email-btn{background:#7FA7B0;border-color:#7FA7B0;color:#101315}.project-secondary-links{display:flex;align-items:center;flex-wrap:wrap;gap:7px;color:var(--muted);font-family:"Montserrat",Arial,sans-serif;font-size:11px;line-height:1.35}.project-secondary-link{color:var(--muted);text-decoration:none;font-weight:700;letter-spacing:.01em}.project-secondary-link:hover,.project-secondary-link:focus-visible{color:#2F5B66;text-decoration:underline}html[data-theme="dark"] .project-secondary-link:hover,html[data-theme="dark"] .project-secondary-link:focus-visible{color:#7FA7B0}
+
+/* Footer V64 */
+.media-technical-footer{text-align:center;color:var(--muted);font-size:10px;line-height:1.4;margin:22px 8px 0}
+.feedback-contact{display:flex;justify-content:center;padding:24px 0 2px}.feedback-contact-link{border:0;background:transparent;color:var(--muted);padding:6px 2px;font-family:"Montserrat",Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:.01em;text-decoration:none}.feedback-contact-link span{display:inline-block;margin-left:4px;transition:transform .16s ease}.feedback-contact-link:hover,.feedback-contact-link:focus-visible{color:#2F5B66}.feedback-contact-link:hover span{transform:translateX(3px)}.feedback-contact-link:focus-visible{outline:2px solid #2F5B66;outline-offset:4px;border-radius:4px}html[data-theme="dark"] .feedback-contact-link:hover,html[data-theme="dark"] .feedback-contact-link:focus-visible{color:#7FA7B0}.footer{text-align:center;color:var(--muted);font-size:10px;padding:20px 0 4px;margin:0}
+
+@media(max-width:520px){
+  .app.shell{padding-left:12px;padding-right:12px}
+  .bos-brand-lockup{gap:9px}.bos-header-logo{width:46px;height:46px;flex-basis:46px}.bos-header-name{font-size:15px}.bos-brand-text{gap:2px}.bos-header-tagline{font-size:9px}
+  .project-sheet-inner{padding:18px}.project-contact-btn{font-size:11px}
+  .media-app-title{font-size:24px}
+  .panel{padding:15px}
+}

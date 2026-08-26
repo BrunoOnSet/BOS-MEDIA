@@ -5,31 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" id="themeColor" content="#F3F1EC" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="MEDIA - BOS" />
-  <title>BRUNO ONSET / MEDIA</title>
-  <link rel="manifest" href="manifest.webmanifest" />
+  <title>BOS — Bruno OnSet · MEDIA</title>
+  <link rel="manifest" href="manifest.webmanifest?v=2.6" />
   <link rel="apple-touch-icon" href="icon-192.png" />
-  <link rel="stylesheet" href="style.css?v=2.5" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2.6" />
 </head>
 <body>
-  <main class="app" id="mainApp">
-    <header class="topbar">
-      <div class="top-inner">
-        <div class="top-title">
-          <a class="tool-eyebrow" href="https://www.brunoguillard.com/" target="_blank" rel="noopener noreferrer" aria-label="Site de Bruno Guillard">
-            <span class="eyebrow-logo" aria-hidden="true">BOS</span>
-            <span class="eyebrow-brand" aria-label="Bruno OnSet"><span class="bos-letter">B</span>RUNO <span class="bos-letter">O</span>N<span class="bos-letter">S</span>ET</span>
-          </a>
-          <h1>MEDIA</h1>
+  <main class="app shell" id="mainApp">
+    <section class="install-app-row" id="installAppRow" hidden aria-label="Installer MEDIA">
+      <button class="install-app-btn" id="installAppBtn" type="button">
+        INSTALLER L’APPLICATION <span aria-hidden="true">→</span>
+      </button>
+    </section>
+
+    <header class="topbar cardlike">
+      <div class="top-inner bos-top-inner">
+        <div class="top-title bos-top-title">
+          <div class="bos-brand-lockup" aria-label="Bruno OnSet">
+            <img class="bos-header-logo" src="assets/logo-bos-header.jpg" alt="Logo Bruno OnSet">
+            <div class="bos-brand-text">
+              <span class="bos-header-name">Bruno OnSet</span>
+              <span class="bos-header-tagline">Avec vous, sur chaque tournage.</span>
+            </div>
+          </div>
         </div>
-        <button class="mode-btn" id="themeToggle" type="button" aria-label="Changer de thème">DARK</button>
+        <div class="top-actions bos-top-actions">
+          <button class="mode-btn" id="themeToggle" type="button" aria-label="Changer de thème">DARK</button>
+        </div>
       </div>
     </header>
 
-    <div class="utility-row">
+    <section class="project-contact project-contact-top" aria-label="Contact professionnel">
+      <button class="project-contact-btn" id="projectContactBtn" type="button">
+        Une question ? Un projet ? On en parle. <span aria-hidden="true">→</span>
+      </button>
+    </section>
+
+    <div class="utility-row bos-utility-row">
       <button class="utility-link" id="tipsBtn" type="button">TIPS</button>
     </div>
+
+    <div class="media-app-title" aria-label="Application MEDIA">MEDIA</div>
 
     <section class="mode-panel">
       <div class="mode-tabs" id="modeTabs" role="tablist" aria-label="Mode de calcul">
@@ -42,7 +63,7 @@
     <section class="panel bitrate-panel" id="bitratePanel">
       <div class="panel-head">
         <div>
-          <div class="panel-kicker">DÉBIT D'ENREGISTREMENT</div>
+          <div class="panel-kicker"><span class="section-number">01</span>DÉBIT D'ENREGISTREMENT</div>
           <div class="panel-subtitle">Choisis un débit rapide ou saisis la valeur du codec.</div>
         </div>
         <button class="small-action" id="addPresetBtn" type="button">+ PRESET</button>
@@ -94,7 +115,7 @@
       <section class="panel">
         <div class="panel-head">
           <div>
-            <div class="panel-kicker">CARTE</div>
+            <div class="panel-kicker"><span class="section-number">02</span>CARTE</div>
             <div class="panel-subtitle">Combien de temps puis-je enregistrer ?</div>
           </div>
           <button class="small-action" data-reset="card" type="button">RESET</button>
@@ -148,7 +169,7 @@
       <section class="panel">
         <div class="panel-head">
           <div>
-            <div class="panel-kicker">TOURNAGE</div>
+            <div class="panel-kicker"><span class="section-number">02</span>TOURNAGE</div>
             <div class="panel-subtitle">Combien de stockage faut-il prévoir ?</div>
           </div>
           <button class="small-action" data-reset="shoot" type="button">RESET</button>
@@ -208,7 +229,7 @@
       <section class="panel">
         <div class="panel-head">
           <div>
-            <div class="panel-kicker">COPIE</div>
+            <div class="panel-kicker"><span class="section-number">02</span>COPIE</div>
             <div class="panel-subtitle">Combien de temps avant de pouvoir démonter ?</div>
           </div>
           <button class="small-action" data-reset="copy" type="button">RESET</button>
@@ -281,17 +302,55 @@
       </section>
     </section>
 
-    <footer>
-      <div class="technical-footer">Débits constants / moyens · capacités décimales · estimation terrain</div>
-      <div class="signature">
-        <a class="footer-brand-link" href="https://www.brunoguillard.com/" target="_blank" rel="noopener noreferrer">
-          <img class="footer-logo" src="logo-bruno-guillard.png" alt="" />
-          <span>Made for the set · Bruno Guillard</span>
-        </a>
-        <span class="app-version">v2.5</span>
-      </div>
-    </footer>
+    <div class="technical-footer media-technical-footer">Débits constants / moyens · capacités décimales · estimation terrain</div>
+    <div class="feedback-contact">
+      <a class="feedback-contact-link" href="mailto:brunoguillardcontact@gmail.com?subject=Suggestion%20%E2%80%94%20BOS%20MEDIA&body=Bonjour%20Bruno%2C%0A%0AJ%E2%80%99ai%20une%20id%C3%A9e%20pour%20am%C3%A9liorer%20MEDIA%20%3A%0A%0A">Une idée pour améliorer l’application ? <span aria-hidden="true">→</span></a>
+    </div>
+    <footer class="footer">BOS — Bruno OnSet · MEDIA V2.6</footer>
   </main>
+
+  <dialog id="installDialog" class="sheet install-sheet">
+    <form method="dialog" class="sheet-inner install-sheet-inner">
+      <div class="sheet-head">
+        <div>
+          <strong>Installer MEDIA</strong>
+          <small id="installHelpText">Ajoutez l’application à votre écran d’accueil.</small>
+        </div>
+        <button value="close" class="iconbtn" aria-label="Fermer">×</button>
+      </div>
+      <div class="install-help" id="installHelpBody"></div>
+      <div class="sheet-actions">
+        <button value="close" class="primary">Compris</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="projectDialog" class="sheet project-sheet">
+    <form method="dialog" class="sheet-inner project-sheet-inner">
+      <div class="project-sheet-head">
+        <div><span class="project-kicker">BRUNO ONSET</span></div>
+        <button class="project-close" value="close" aria-label="Fermer">×</button>
+      </div>
+      <div class="project-profile">
+        <strong>Bruno Guillard</strong>
+        <span>Réalisateur · Directeur de la photographie · Consultant image</span>
+      </div>
+      <div class="project-services" aria-label="Prestations">
+        <span>Réalisation</span>
+        <span>Direction de la photographie</span>
+        <span>Conseil / préparation image</span>
+      </div>
+      <p class="project-note">Échangeons autour de votre projet, de sa mise en scène, de ses intentions d’image et de son dispositif de tournage.</p>
+      <div class="project-actions">
+        <a class="project-email-btn" href="mailto:brunoguillardcontact@gmail.com?subject=Projet%20de%20tournage%20%E2%80%94%20Bruno%20OnSet&body=Bonjour%20Bruno%2C%0A%0AJe%20vous%20contacte%20depuis%20BOS%20MEDIA.%0A%0A">Écrire à Bruno <span aria-hidden="true">→</span></a>
+        <div class="project-secondary-links">
+          <a class="project-secondary-link" href="https://wa.me/33679979111?text=Bonjour%20Bruno%2C%0A%0AJe%20vous%20contacte%20depuis%20BOS%20MEDIA.%0A%0A" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <span aria-hidden="true">·</span>
+          <a class="project-secondary-link" href="https://brunoguillard.com" target="_blank" rel="noopener noreferrer">BrunoGuillard.com</a>
+        </div>
+      </div>
+    </form>
+  </dialog>
 
   <dialog id="tipsDialog">
     <div class="dialog-inner">
@@ -366,6 +425,6 @@
     </form>
   </dialog>
 
-  <script src="app.js?v=2.5"></script>
+  <script src="app.js?v=2.6"></script>
 </body>
 </html>

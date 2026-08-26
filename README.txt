@@ -38,3 +38,14 @@ V2.4 — BOS CAMERA DB
 
 V2.5 — DARK HEADER FIX
 - Header uses the BOS dark background (#111418) and dark border (#25292E) in dark mode.
+
+
+V2.6 — DA BOS V64
+- Direction artistique strictement harmonisée sur BOS_BRUNO_ONSET_V64.
+- Entête V64 avec logo BOS, Bruno OnSet et slogan.
+- Bouton INSTALLER L’APPLICATION au placement V64 + aide d’installation.
+- CTA « Une question ? Un projet ? On en parle. → » + carte contact V64.
+- CTA bas « Une idée pour améliorer l’application ? → ».
+- Couleurs, typographies, fonds, cartes, bordures, rayons, boutons et espacements alignés sur V64.
+- Numérotation visuelle des sections MEDIA.
+- Toutes les fonctions et calculs MEDIA V2.5 conservés sans modification métier.

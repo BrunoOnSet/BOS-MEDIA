@@ -1,6 +1,6 @@
 {
-  "name": "BRUNO ONSET / MEDIA",
-  "short_name": "MEDIA - BOS",
+  "name": "BOS — Bruno OnSet · MEDIA",
+  "short_name": "BOS MEDIA",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#F3F1EC",
@@ -18,5 +18,5 @@
       "type": "image/png"
     }
   ],
-  "version": "2.5"
+  "version": "2.6"
 }
