@@ -8,12 +8,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="MEDIA - BOS" />
   <title>BOS — Bruno OnSet · MEDIA</title>
-  <link rel="manifest" href="manifest.webmanifest?v=2.10" />
+  <link rel="manifest" href="manifest.webmanifest?v=2.11" />
   <link rel="apple-touch-icon" href="icon-192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2.10" />
+  <link rel="stylesheet" href="style.css?v=2.11" />
 </head>
 <body>
   <main class="app shell" id="mainApp">
@@ -57,19 +57,17 @@
     
     <section class="media-modules media-modules-top" aria-label="Réglages MEDIA">
       <article class="module open" data-module="bitrate">
-        <button class="module-head" type="button" data-module-toggle="bitrate" aria-expanded="true" aria-controls="bitrateModuleBody">
-          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><strong>01 DÉBIT</strong><small>enregistrement</small></span></span>
-          <span class="chev" aria-hidden="true">⌄</span>
+        <button class="module-head card-heading collapsible-heading" type="button" data-module-toggle="bitrate" aria-expanded="true" aria-controls="bitrateModuleBody">
+          <span class="step">01</span>
+          <div class="heading-copy">
+            <h2>DÉBIT D'ENREGISTREMENT</h2>
+            <p>Choisis un débit rapide ou saisis la valeur du codec.</p>
+          </div>
+          <span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <div class="module-body" id="bitrateModuleBody">
 <section class="panel bitrate-panel" id="bitratePanel">
-      <div class="panel-head">
-        <div>
-          <div class="panel-kicker"><span class="section-number">01</span>DÉBIT D'ENREGISTREMENT</div>
-          <div class="panel-subtitle">Choisis un débit rapide ou saisis la valeur du codec.</div>
-        </div>
-        <button class="small-action" id="addPresetBtn" type="button">+ PRESET</button>
-      </div>
+      <div class="module-action-row"><button class="small-action" id="addPresetBtn" type="button">+ PRESET</button></div>
 
       <div class="hero-field">
         <div class="field-label-row">
@@ -118,19 +116,17 @@
 
 <section class="media-modules" id="mediaModules" aria-label="Outils MEDIA">
       <article class="module open" data-module="card">
-        <button class="module-head" type="button" data-module-toggle="card" aria-expanded="true" aria-controls="cardModuleBody">
-          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><strong>02 CARTE</strong><small>durée</small></span></span>
-          <span class="chev" aria-hidden="true">⌄</span>
+        <button class="module-head card-heading collapsible-heading" type="button" data-module-toggle="card" aria-expanded="true" aria-controls="cardModuleBody">
+          <span class="step">02</span>
+          <div class="heading-copy">
+            <h2>CARTE</h2>
+            <p>Combien de temps puis-je enregistrer ?</p>
+          </div>
+          <span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <div class="module-body" id="cardModuleBody">
 <section class="panel">
-        <div class="panel-head">
-          <div>
-            <div class="panel-kicker"><span class="section-number">02</span>CARTE</div>
-            <div class="panel-subtitle">Combien de temps puis-je enregistrer ?</div>
-          </div>
-          <button class="small-action" data-reset="card" type="button">RESET</button>
-        </div>
+        <div class="module-action-row"><button class="small-action" data-reset="card" type="button">RESET</button></div>
 
         <div class="hero-field">
           <label for="cardCapacity">Capacité</label>
@@ -178,19 +174,17 @@
       </article>
 
       <article class="module" data-module="shoot">
-        <button class="module-head" type="button" data-module-toggle="shoot" aria-expanded="false" aria-controls="shootModuleBody">
-          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><strong>03 TOURNAGE</strong><small>stockage</small></span></span>
-          <span class="chev" aria-hidden="true">⌄</span>
+        <button class="module-head card-heading collapsible-heading" type="button" data-module-toggle="shoot" aria-expanded="false" aria-controls="shootModuleBody">
+          <span class="step">03</span>
+          <div class="heading-copy">
+            <h2>TOURNAGE</h2>
+            <p>Combien de stockage faut-il prévoir ?</p>
+          </div>
+          <span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <div class="module-body" id="shootModuleBody" hidden>
 <section class="panel">
-        <div class="panel-head">
-          <div>
-            <div class="panel-kicker"><span class="section-number">03</span>TOURNAGE</div>
-            <div class="panel-subtitle">Combien de stockage faut-il prévoir ?</div>
-          </div>
-          <button class="small-action" data-reset="shoot" type="button">RESET</button>
-        </div>
+        <div class="module-action-row"><button class="small-action" data-reset="shoot" type="button">RESET</button></div>
 
         <div class="field-grid two-col">
           <div class="hero-field compact-hero">
@@ -244,19 +238,17 @@
       </article>
 
       <article class="module" data-module="copy">
-        <button class="module-head" type="button" data-module-toggle="copy" aria-expanded="false" aria-controls="copyModuleBody">
-          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><strong>04 COPIE</strong><small>temps</small></span></span>
-          <span class="chev" aria-hidden="true">⌄</span>
+        <button class="module-head card-heading collapsible-heading" type="button" data-module-toggle="copy" aria-expanded="false" aria-controls="copyModuleBody">
+          <span class="step">04</span>
+          <div class="heading-copy">
+            <h2>COPIE</h2>
+            <p>Combien de temps avant de pouvoir démonter ?</p>
+          </div>
+          <span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <div class="module-body" id="copyModuleBody" hidden>
 <section class="panel">
-        <div class="panel-head">
-          <div>
-            <div class="panel-kicker"><span class="section-number">04</span>COPIE</div>
-            <div class="panel-subtitle">Combien de temps avant de pouvoir démonter ?</div>
-          </div>
-          <button class="small-action" data-reset="copy" type="button">RESET</button>
-        </div>
+        <div class="module-action-row"><button class="small-action" data-reset="copy" type="button">RESET</button></div>
 
         <div class="field-grid two-col copy-grid">
           <div class="hero-field compact-hero">
@@ -331,7 +323,7 @@
     <div class="feedback-contact">
       <a class="feedback-contact-link" href="mailto:brunoguillardcontact@gmail.com?subject=Suggestion%20%E2%80%94%20BOS%20MEDIA&body=Bonjour%20Bruno%2C%0A%0AJ%E2%80%99ai%20une%20id%C3%A9e%20pour%20am%C3%A9liorer%20MEDIA%20%3A%0A%0A">Une idée pour améliorer l’application ? <span aria-hidden="true">→</span></a>
     </div>
-    <footer class="footer">BOS — Bruno OnSet · MEDIA V2.10</footer>
+    <footer class="footer">BOS — Bruno OnSet · MEDIA V2.11</footer>
   </main>
 
   <dialog id="installDialog" class="sheet install-sheet">
@@ -450,6 +442,6 @@
     </form>
   </dialog>
 
-  <script src="app.js?v=2.10"></script>
+  <script src="app.js?v=2.11"></script>
 </body>
 </html>

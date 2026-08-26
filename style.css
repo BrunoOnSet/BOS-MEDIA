@@ -318,3 +318,23 @@ html[data-theme="dark"] .primary-action{background:#7FA7B0;color:#101315}
 .section-number{display:inline-block;margin-right:8px;color:var(--muted);font-variant-numeric:tabular-nums;font-weight:900}
 .panel-subtitle{margin-top:4px;color:var(--muted);font-size:10px;line-height:1.35}
 @media(max-width:520px){.module-body{padding:14px}.module-body .result-value{font-size:34px}}
+
+
+/* V2.11 — numéros + titres/sous-titres repris fidèlement de BOS_LIGHT_V0_62 */
+.media-modules-top{margin-top:12px;margin-bottom:12px}
+.media-modules{gap:12px;margin-top:0;margin-bottom:2px}
+.module{background:var(--panel);border:1px solid var(--header-border);border-radius:22px;overflow:hidden;box-shadow:none}
+.module-head.card-heading{display:flex;gap:11px;align-items:center;width:100%;padding:15px 16px 14px;border:0;background:transparent;text-align:left;cursor:pointer;position:relative;padding-right:42px}
+.module.open>.module-head.card-heading{border-bottom:1px solid var(--card-border)}
+.card-heading .step{width:32px;height:32px;min-width:32px;border-radius:10px;display:grid;place-items:center;background:var(--accent-soft);border:1px solid rgba(47,91,102,.38);color:var(--accent);font-size:11px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.card-heading .heading-copy{display:flex;flex-direction:column;line-height:1;min-width:0}
+.card-heading .heading-copy h2{margin:0;font-family:"Montserrat",Arial,sans-serif;font-size:16px;line-height:1;font-weight:800;letter-spacing:0;color:var(--accent)}
+.card-heading .heading-copy p{display:block;margin:2px 0 0;font-family:"Montserrat",Arial,sans-serif;font-size:10px;font-weight:400;letter-spacing:0;color:var(--muted);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.card-heading .chevron{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--accent);font-size:18px;transition:transform .2s ease}
+.module.open>.card-heading .chevron{transform:translateY(-50%) rotate(180deg)}
+.module-body{border-top:0;padding:14px 16px 16px}
+.module-action-row{display:flex;justify-content:flex-end;align-items:center;margin:0 0 12px}
+.module-body>.panel{margin:0;padding:0;background:transparent;border:0;border-radius:0;box-shadow:none}
+.module-body>.result{margin-top:12px}
+@media(max-width:520px){.card-heading .heading-copy p{max-width:100%}.module-body{padding:12px 14px 14px}}
+@media(max-width:380px){.card-heading .heading-copy p{max-width:220px}}
