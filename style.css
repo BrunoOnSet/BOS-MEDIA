@@ -288,3 +288,33 @@ html[data-theme="dark"] .primary-action{background:#7FA7B0;color:#101315}
 .section-number{display:inline-block;margin-right:8px;color:var(--muted);font-variant-numeric:tabular-nums}
 .panel-kicker,.result-label,.recommendation-kicker,.camera-preset-label,.wizard-label{font-size:10px;letter-spacing:.16em;font-weight:900;color:var(--accent)}
 .panel-subtitle{margin-top:4px;color:var(--muted);font-size:10px;line-height:1.35}
+
+
+/* V2.10 — modules MEDIA reconstruits sur la structure exacte V64 */
+.media-modules-top{display:flex;flex-direction:column;gap:10px;margin-top:10px;margin-bottom:10px}
+.media-modules{display:flex;flex-direction:column;gap:10px;margin-top:0;margin-bottom:2px}
+.module{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:none}
+.module-head{width:100%;display:flex;align-items:center;justify-content:space-between;padding:15px 16px;border:0;background:transparent;cursor:pointer}
+.module-title{display:flex;align-items:center;gap:10px;text-align:left}
+.module-dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.module-title strong{font-size:16px!important;font-weight:700;letter-spacing:0;color:var(--accent)!important}
+.module-title small{display:block;color:var(--muted);font-size:10px;margin-top:2px;font-weight:400;letter-spacing:0}
+.chev{color:var(--muted);font-size:17px;transition:.18s transform}
+.module.open .chev{transform:rotate(180deg)}
+.module-body{border-top:1px solid var(--line);padding:16px 18px}
+.module-body[hidden]{display:none!important}
+/* flatten the former nested panels so each MEDIA block behaves like a single V64 module */
+.module-body > .panel,.module-body > .result{background:transparent;border:0;box-shadow:none;border-radius:0;padding:0;margin-top:0}
+.module-body > .result{margin-top:12px}
+.module-body .panel-head{margin-bottom:12px}
+.module-body .advanced-box,.module-body .camera-preset-summary,.module-body .preset-row select,.module-body .number-unit-field,.module-body .metric-grid div,.module-body .recommendation,.module-body .copy-note{border-color:var(--line)}
+.module-body .advanced-box,.module-body .camera-preset-summary,.module-body .preset-row select,.module-body .number-unit-field,.module-body .metric-grid div,.module-body .recommendation,.module-body .copy-note{background:var(--panel2)}
+.module-body .result-hero{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:13px;text-align:left}
+.module-body .result-value{font-size:38px;line-height:1.03;letter-spacing:-.04em;margin-top:8px}
+.module-body .result-state{font-size:10px;letter-spacing:.08em;margin-top:7px}
+.module-body .result-detail{font-size:11px;margin-top:6px}
+.module-body .metric-grid{padding:12px 0 0;gap:10px}
+.panel-kicker,.result-label,.recommendation-kicker,.camera-preset-label,.wizard-label{font-size:10px;letter-spacing:.16em;font-weight:900;color:var(--accent)}
+.section-number{display:inline-block;margin-right:8px;color:var(--muted);font-variant-numeric:tabular-nums;font-weight:900}
+.panel-subtitle{margin-top:4px;color:var(--muted);font-size:10px;line-height:1.35}
+@media(max-width:520px){.module-body{padding:14px}.module-body .result-value{font-size:34px}}
