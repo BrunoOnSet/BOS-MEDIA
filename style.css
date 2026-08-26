@@ -275,3 +275,16 @@ html[data-theme="dark"] .primary-action{background:#7FA7B0;color:#101315}
 .module-title strong,.panel-kicker,.result-label,.recommendation-kicker,.camera-preset-label,.wizard-label{font-size:10px;letter-spacing:.16em;font-weight:900;color:var(--accent)}
 .module-title small,.panel-subtitle{font-size:10px;color:var(--muted)}
 @media(max-width:430px){.media-modules{margin-top:12px}.module-number{font-size:9px}}
+
+
+/* V2.9 — titres et espacements recollés strictement à la référence V64 */
+.media-modules{display:flex;flex-direction:column;gap:10px;margin-top:10px;margin-bottom:2px}
+.module-head{padding:15px 16px}
+.module-title{gap:10px;text-align:left}
+.module-title strong{font-size:16px!important;font-weight:700;letter-spacing:0;color:var(--accent)!important}
+.module-title small{display:block;color:var(--muted);font-size:10px;margin-top:2px;font-weight:400}
+.module-dot{background:var(--accent)}
+.module-title-line,.module-number{display:contents}
+.section-number{display:inline-block;margin-right:8px;color:var(--muted);font-variant-numeric:tabular-nums}
+.panel-kicker,.result-label,.recommendation-kicker,.camera-preset-label,.wizard-label{font-size:10px;letter-spacing:.16em;font-weight:900;color:var(--accent)}
+.panel-subtitle{margin-top:4px;color:var(--muted);font-size:10px;line-height:1.35}
