@@ -1,6 +1,7 @@
 {
   "app": "BOS MEDIA",
-  "version": "2.13",
+  "version": "2.14",
   "daReference": "BOS_BRUNO_ONSET_V64",
-  "bubbleHeadingReference": "BOS_LIGHT_V0_62"
+  "bubbleHeadingReference": "BOS_LIGHT_V0_62",
+  "appIcon": "MEDIA BOS definitive"
 }
