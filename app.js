@@ -298,13 +298,16 @@
 
   function switchMode(mode) {
     state.mode = mode;
-    [...$('modeTabs').querySelectorAll('button[data-mode]')].forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode));
+    const modeTabs = $('modeTabs');
+    if (modeTabs) {
+      [...modeTabs.querySelectorAll('button[data-mode]')].forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode));
+    }
     document.querySelectorAll('[data-mode-content]').forEach(section => {
       const active = section.dataset.modeContent === mode;
       section.hidden = !active;
       section.classList.toggle('active', active);
     });
-    $('bitratePanel').hidden = mode === 'copy';
+    if ($('bitratePanel')) $('bitratePanel').hidden = false;
   }
 
 
@@ -530,9 +533,30 @@
     updateAll();
   }
 
-  $('modeTabs').addEventListener('click', e => {
-    const btn = e.target.closest('button[data-mode]');
-    if (btn) switchMode(btn.dataset.mode);
+  const modeTabsEl = $('modeTabs');
+  if (modeTabsEl) {
+    modeTabsEl.addEventListener('click', e => {
+      const btn = e.target.closest('button[data-mode]');
+      if (btn) switchMode(btn.dataset.mode);
+    });
+  }
+
+  function syncModuleState(moduleEl) {
+    const body = moduleEl.querySelector('.module-body');
+    const toggle = moduleEl.querySelector('[data-module-toggle]');
+    const open = moduleEl.classList.contains('open');
+    if (body) body.hidden = !open;
+    if (toggle) toggle.setAttribute('aria-expanded', String(open));
+  }
+
+  document.querySelectorAll('.module[data-module]').forEach(moduleEl => syncModuleState(moduleEl));
+  document.querySelectorAll('[data-module-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const moduleEl = btn.closest('.module');
+      if (!moduleEl) return;
+      moduleEl.classList.toggle('open');
+      syncModuleState(moduleEl);
+    });
   });
 
   $('bitrateUnit').addEventListener('click', e => {
@@ -720,6 +744,7 @@
   updateCameraPresetSummary();
   renderPresets();
   switchMode('card');
+  document.querySelectorAll('.module[data-module]').forEach(moduleEl => syncModuleState(moduleEl));
   updateAll();
   refreshSharedCameraDb();
 

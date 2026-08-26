@@ -1,5 +1,5 @@
-const CACHE="bos-media-v2.6";
-const ASSETS=["./","./index.html","./style.css?v=2.6","./app.js?v=2.6","./manifest.webmanifest","./icon-192.png","./icon-512.png","./logo-bruno-guillard.png","./assets/logo-bos-header.jpg"];
+const CACHE="bos-media-v2.7";
+const ASSETS=["./","./index.html","./style.css?v=2.7","./app.js?v=2.7","./manifest.webmanifest","./icon-192.png","./icon-512.png","./logo-bruno-guillard.png","./assets/logo-bos-header.jpg"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));self.skipWaiting();});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim();});
 self.addEventListener("fetch",e=>{

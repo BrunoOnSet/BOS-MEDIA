@@ -8,12 +8,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="MEDIA - BOS" />
   <title>BOS — Bruno OnSet · MEDIA</title>
-  <link rel="manifest" href="manifest.webmanifest?v=2.6" />
+  <link rel="manifest" href="manifest.webmanifest?v=2.7" />
   <link rel="apple-touch-icon" href="icon-192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2.6" />
+  <link rel="stylesheet" href="style.css?v=2.7" />
 </head>
 <body>
   <main class="app shell" id="mainApp">
@@ -51,14 +51,6 @@
     </div>
 
     <div class="media-app-title" aria-label="Application MEDIA">MEDIA</div>
-
-    <section class="mode-panel">
-      <div class="mode-tabs" id="modeTabs" role="tablist" aria-label="Mode de calcul">
-        <button class="active" data-mode="card" type="button"><span>CARTE</span><small>durée</small></button>
-        <button data-mode="shoot" type="button"><span>TOURNAGE</span><small>stockage</small></button>
-        <button data-mode="copy" type="button"><span>COPIE</span><small>temps</small></button>
-      </div>
-    </section>
 
     <section class="panel bitrate-panel" id="bitratePanel">
       <div class="panel-head">
@@ -111,8 +103,15 @@
       </div>
     </section>
 
-    <section class="mode-content active" id="cardMode" data-mode-content="card">
-      <section class="panel">
+    
+    <section class="media-modules" id="mediaModules" aria-label="Outils MEDIA">
+      <article class="module open" data-module="card">
+        <button class="module-head" type="button" data-module-toggle="card" aria-expanded="true" aria-controls="cardModuleBody">
+          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><strong>CARTE</strong><small>durée</small></span></span>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </button>
+        <div class="module-body" id="cardModuleBody">
+<section class="panel">
         <div class="panel-head">
           <div>
             <div class="panel-kicker"><span class="section-number">02</span>CARTE</div>
@@ -163,10 +162,16 @@
           <div><span>Capacité calculée</span><strong id="cardUsable">144 Go</strong></div>
         </div>
       </section>
-    </section>
+        </div>
+      </article>
 
-    <section class="mode-content" id="shootMode" data-mode-content="shoot" hidden>
-      <section class="panel">
+      <article class="module" data-module="shoot">
+        <button class="module-head" type="button" data-module-toggle="shoot" aria-expanded="false" aria-controls="shootModuleBody">
+          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><strong>TOURNAGE</strong><small>stockage</small></span></span>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </button>
+        <div class="module-body" id="shootModuleBody" hidden>
+<section class="panel">
         <div class="panel-head">
           <div>
             <div class="panel-kicker"><span class="section-number">02</span>TOURNAGE</div>
@@ -223,10 +228,16 @@
           <div><span>Durée totale</span><strong id="shootDuration">12 h</strong></div>
         </div>
       </section>
-    </section>
+        </div>
+      </article>
 
-    <section class="mode-content" id="copyMode" data-mode-content="copy" hidden>
-      <section class="panel">
+      <article class="module" data-module="copy">
+        <button class="module-head" type="button" data-module-toggle="copy" aria-expanded="false" aria-controls="copyModuleBody">
+          <span class="module-title"><i class="module-dot" aria-hidden="true"></i><span><strong>COPIE</strong><small>temps</small></span></span>
+          <span class="chev" aria-hidden="true">⌄</span>
+        </button>
+        <div class="module-body" id="copyModuleBody" hidden>
+<section class="panel">
         <div class="panel-head">
           <div>
             <div class="panel-kicker"><span class="section-number">02</span>COPIE</div>
@@ -300,9 +311,11 @@
           <div ><span>Total copies</span><strong id="copyAll">27 min</strong></div>
         </div>
       </section>
+        </div>
+      </article>
     </section>
 
-    <div class="technical-footer media-technical-footer">Débits constants / moyens · capacités décimales · estimation terrain</div>
+<div class="technical-footer media-technical-footer">Débits constants / moyens · capacités décimales · estimation terrain</div>
     <div class="feedback-contact">
       <a class="feedback-contact-link" href="mailto:brunoguillardcontact@gmail.com?subject=Suggestion%20%E2%80%94%20BOS%20MEDIA&body=Bonjour%20Bruno%2C%0A%0AJ%E2%80%99ai%20une%20id%C3%A9e%20pour%20am%C3%A9liorer%20MEDIA%20%3A%0A%0A">Une idée pour améliorer l’application ? <span aria-hidden="true">→</span></a>
     </div>
@@ -425,6 +438,6 @@
     </form>
   </dialog>
 
-  <script src="app.js?v=2.6"></script>
+  <script src="app.js?v=2.7"></script>
 </body>
 </html>
