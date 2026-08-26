@@ -338,3 +338,8 @@ html[data-theme="dark"] .primary-action{background:#7FA7B0;color:#101315}
 .module-body>.result{margin-top:12px}
 @media(max-width:520px){.card-heading .heading-copy p{max-width:100%}.module-body{padding:12px 14px 14px}}
 @media(max-width:380px){.card-heading .heading-copy p{max-width:220px}}
+
+
+/* V2.12 — tête de bulle recollée à BOS_LIGHT_V0_62 : alignement du bloc titre à gauche */
+.module-head.card-heading{justify-content:flex-start!important}
+.card-heading .heading-copy{flex:1 1 auto;max-width:none}
