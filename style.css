@@ -168,6 +168,9 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",
 .bos-header-logo{display:block;width:56px;height:56px;object-fit:contain;flex:0 0 56px;background:transparent;border:0;border-radius:0}
 .bos-brand-text{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
 .bos-header-name{font-family:"Montserrat",Arial,sans-serif;font-weight:700;font-size:19px;line-height:1;color:#2F5B66;letter-spacing:0;white-space:nowrap}
+
+.bos-header-app{margin-left:4px;color:#17191C;font-weight:700}
+html[data-theme="dark"] .bos-header-app{color:#17191C}
 .bos-header-tagline{font-family:"Montserrat",Arial,sans-serif;font-weight:400;font-size:11px;line-height:1.2;color:#17191C;letter-spacing:0;white-space:nowrap}
 html[data-theme="dark"] .bos-header-name{color:#2F5B66}
 html[data-theme="dark"] .bos-header-tagline{color:#9AA2A9}
